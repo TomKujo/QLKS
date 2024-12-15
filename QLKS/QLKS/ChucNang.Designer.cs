@@ -37,6 +37,7 @@
             btnKhachHang = new Button();
             btnNhanVien = new Button();
             btnDoanhThu = new Button();
+            btnDangXuat = new Button();
             SuspendLayout();
             // 
             // BottomToolStripPanel
@@ -115,11 +116,22 @@
             btnDoanhThu.UseVisualStyleBackColor = true;
             btnDoanhThu.Click += btnDoanhThu_Click;
             // 
+            // btnDangXuat
+            // 
+            btnDangXuat.Location = new Point(12, 128);
+            btnDangXuat.Name = "btnDangXuat";
+            btnDangXuat.Size = new Size(110, 23);
+            btnDangXuat.TabIndex = 4;
+            btnDangXuat.Text = "Đăng xuất";
+            btnDangXuat.UseVisualStyleBackColor = true;
+            btnDangXuat.Click += btnDangXuat_Click;
+            // 
             // frmChucNang
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(134, 136);
+            ClientSize = new Size(134, 161);
+            Controls.Add(btnDangXuat);
             Controls.Add(btnNhanVien);
             Controls.Add(btnDoanhThu);
             Controls.Add(btnKhachHang);
@@ -142,5 +154,6 @@
         private Button btnKhachHang;
         private Button btnNhanVien;
         private Button btnDoanhThu;
+        private Button btnDangXuat;
     }
 }

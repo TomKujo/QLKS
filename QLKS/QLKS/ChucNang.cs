@@ -59,5 +59,12 @@ namespace QLKS
             frmNV.Show();
             //this.Hide();
         }
+
+        private void btnDangXuat_Click(object sender, EventArgs e)
+        {
+            frmDangNhap frmDangNhap = new frmDangNhap();
+            frmDangNhap.Show();
+            //this.Hide();
+        }
     }
 }

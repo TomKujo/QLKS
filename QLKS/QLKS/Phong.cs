@@ -21,7 +21,7 @@ namespace QLKS
             _conn = new SqlConnection("Data Source=MSI\\SQLEXPRESS;Initial Catalog=QLKS;Integrated Security=True;TrustServerCertificate=True");
         }
 
-        private void updatePhong()
+        public void updatePhong(string tinhTrang = "Tất cả")
         {
             try
             {
@@ -30,7 +30,14 @@ namespace QLKS
                     _conn.Open();
                 }
                 string selectPhong = "SELECT * FROM Phong";
-                SqlDataAdapter adapter = new SqlDataAdapter(selectPhong, _conn);
+                SqlCommand cmd = new SqlCommand(selectPhong, _conn);
+                if (tinhTrang != "Tất cả")
+                {
+                    selectPhong += " WHERE TinhTrang = @TinhTrang";
+                    cmd.CommandText = selectPhong;
+                    cmd.Parameters.AddWithValue("@TinhTrang", tinhTrang);
+                }
+                SqlDataAdapter adapter = new SqlDataAdapter(cmd);
                 DataTable dt = new DataTable();
                 adapter.Fill(dt);
                 dgvPhong.DataSource = dt;
@@ -48,26 +55,33 @@ namespace QLKS
             }
         }
 
+        private void loadTinhTrangComboBox()
+        {
+            cboHienThi.Items.Clear();
+            cboHienThi.Items.Add("Trống");
+            cboHienThi.Items.Add("Không trống");
+        }
+
         private void loadHangComboBox()
         {
-            string query = "SELECT * FROM Phong";
-            SqlDataAdapter da = new SqlDataAdapter(query, _conn);
-            DataTable dt = new DataTable();
-            da.Fill(dt);
-            cboHang.DisplayMember = "Hang";
-            cboHang.ValueMember = "Hang";
-            cboHang.DataSource = dt;
+            cboHienThi.Items.Clear();
+            cboHienThi.Items.Add("Phổ thông");
+            cboHienThi.Items.Add("Thương gia");
         }
 
         private void loadDatTruocComboBox()
         {
-            string query = "SELECT * FROM Phong";
-            SqlDataAdapter da = new SqlDataAdapter(query, _conn);
-            DataTable dt = new DataTable();
-            da.Fill(dt);
-            cboDatTruoc.DisplayMember = "DatTruoc";
-            cboDatTruoc.ValueMember = "DatTruoc";
-            cboDatTruoc.DataSource = dt;
+            cboHienThi.Items.Clear();
+            cboHienThi.Items.Add("Chưa đặt trước");
+            cboHienThi.Items.Add("Đã đặt trước");
+        }
+
+        private void loadHienThiComboBox()
+        {
+            cboHienThi.Items.Clear();
+            cboHienThi.Items.Add("Tất cả");
+            cboHienThi.Items.Add("Trống");
+            cboHienThi.Items.Add("Không trống");
         }
 
         private void frmPhong_Load(object sender, EventArgs e)
@@ -75,8 +89,13 @@ namespace QLKS
             updatePhong();
             loadHangComboBox();
             loadDatTruocComboBox();
+            loadTinhTrangComboBox();
+            loadHienThiComboBox();
             cboHang.SelectedIndex = -1;
             cboDatTruoc.SelectedIndex = -1;
+            cboTinhTrang.SelectedIndex = -1;
+            cboHienThi.SelectedIndex = 0;
+            cboHienThi.SelectedIndexChanged += cboHienThi_SelectedIndexChanged;
         }
 
         private bool IsMaPhongExist(string maPhong)
@@ -109,9 +128,9 @@ namespace QLKS
 
         private void btnThem_Click(object sender, EventArgs e)
         {
-            if (string.IsNullOrEmpty(txtMaPhong.Text) || string.IsNullOrEmpty(cboHang.SelectedValue.ToString()) || string.IsNullOrEmpty(txtSoGiuong.Text) || string.IsNullOrEmpty(txtGia.Text) || string.IsNullOrEmpty(cboDatTruoc.SelectedValue.ToString()))
+            if (string.IsNullOrWhiteSpace(txtMaPhong.Text) || cboTinhTrang.SelectedItem == null || cboHang.SelectedItem == null || string.IsNullOrWhiteSpace(txtSoGiuong.Text) || string.IsNullOrWhiteSpace(txtGia.Text) || cboDatTruoc.SelectedItem == null)
             {
-                MessageBox.Show("Vui lòng nhập đầy đủ Mã Phòng, Hạng, Số Giường, Giá, Đặt Trước.");
+                MessageBox.Show("Vui lòng nhập đầy đủ Mã Phòng, Tình Trạng, Hạng, Số Giường, Giá, Đặt Trước.");
                 return;
             }
             if (IsMaPhongExist(txtMaPhong.Text))
@@ -121,13 +140,14 @@ namespace QLKS
             }
             try
             {
-                string insertString = "INSERT INTO Phong VALUES(@MaPhong, @Hang, @SoGiuong, @Gia, @DatTruoc)";
+                string insertString = "INSERT INTO Phong VALUES(@MaPhong, @TinhTrang, @Hang, @SoGiuong, @Gia, @DatTruoc)";
                 SqlCommand cmd = new SqlCommand(insertString, _conn);
                 cmd.Parameters.AddWithValue("@MaPhong", txtMaPhong.Text);
-                cmd.Parameters.AddWithValue("@Hang", cboHang.SelectedValue.ToString());
+                cmd.Parameters.AddWithValue("@TinhTrang", cboTinhTrang.SelectedItem.ToString());
+                cmd.Parameters.AddWithValue("@Hang", cboHang.SelectedItem.ToString());
                 cmd.Parameters.AddWithValue("@SoGiuong", txtSoGiuong.Text);
                 cmd.Parameters.AddWithValue("@Gia", txtGia.Text);
-                cmd.Parameters.AddWithValue("@DatTruoc", cboDatTruoc.SelectedValue.ToString());
+                cmd.Parameters.AddWithValue("@DatTruoc", cboDatTruoc.SelectedItem.ToString());
                 if (_conn.State == ConnectionState.Closed)
                 {
                     _conn.Open();
@@ -136,10 +156,12 @@ namespace QLKS
                 MessageBox.Show("Thêm thành công");
                 updatePhong();
                 txtMaPhong.Clear();
+                cboTinhTrang.SelectedIndex = -1;
                 cboHang.SelectedIndex = -1;
                 txtSoGiuong.Clear();
                 txtGia.Clear();
                 cboDatTruoc.SelectedIndex = -1;
+                cboHienThi.SelectedIndex = 0;
             }
             catch (Exception ex)
             {
@@ -157,6 +179,7 @@ namespace QLKS
         private void dgvPhong_RowHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
         {
             txtMaPhong.Text = dgvPhong.Rows[e.RowIndex].Cells["MaPhong"].Value.ToString();
+            cboTinhTrang.SelectedValue = dgvPhong.Rows[e.RowIndex].Cells["TinhTrang"].Value.ToString();
             cboHang.SelectedValue = dgvPhong.Rows[e.RowIndex].Cells["Hang"].Value.ToString();
             txtSoGiuong.Text = dgvPhong.Rows[e.RowIndex].Cells["SoGiuong"].Value.ToString();
             txtGia.Text = dgvPhong.Rows[e.RowIndex].Cells["Gia"].Value.ToString();
@@ -165,21 +188,27 @@ namespace QLKS
 
         private void btnSua_Click(object sender, EventArgs e)
         {
-            if (string.IsNullOrEmpty(txtMaPhong.Text))
+            if (string.IsNullOrWhiteSpace(txtMaPhong.Text))
             {
-                MessageBox.Show("Vui lòng chọn một Phòng để sửa và nhập Hạng, Số Giường, Giá, Đặt Trước mới.");
+                MessageBox.Show("Vui lòng chọn một Phòng để sửa và nhập Tình Trạng, Hạng, Số Giường, Giá, Đặt Trước mới.");
+                return;
+            }
+            if (!IsMaPhongExist(txtMaPhong.Text))
+            {
+                MessageBox.Show("Mã Phòng không hợp lệ");
                 return;
             }
             try
             {
-                string query = "UPDATE Phong SET Hang = @HangMoi, SoGiuong = @SoGiuongMoi, Gia = @GiaMoi, DatTruoc = @DatTruocMoi WHERE MaPhong = @MaPhong";
+                string query = "UPDATE Phong SET TinhTrang = @TinhTrangMoi, Hang = @HangMoi, SoGiuong = @SoGiuongMoi, Gia = @GiaMoi, DatTruoc = @DatTruocMoi WHERE MaPhong = @MaPhong";
                 using (SqlCommand sqlCommand = new SqlCommand(query, _conn))
                 {
                     sqlCommand.Parameters.AddWithValue("@MaPhong", txtMaPhong.Text);
-                    sqlCommand.Parameters.AddWithValue("@HangMoi", cboHang.SelectedValue.ToString());
+                    sqlCommand.Parameters.AddWithValue("@TinhTrangMoi", cboTinhTrang.SelectedItem?.ToString());
+                    sqlCommand.Parameters.AddWithValue("@HangMoi", cboHang.SelectedItem?.ToString());
                     sqlCommand.Parameters.AddWithValue("@SoGiuongMoi", txtSoGiuong.Text);
                     sqlCommand.Parameters.AddWithValue("@GiaMoi", txtGia.Text);
-                    sqlCommand.Parameters.AddWithValue("@DatTruocMoi", cboDatTruoc.SelectedValue.ToString());
+                    sqlCommand.Parameters.AddWithValue("@DatTruocMoi", cboDatTruoc.SelectedItem?.ToString());
                     if (_conn.State == ConnectionState.Closed)
                     {
                         _conn.Open();
@@ -190,10 +219,12 @@ namespace QLKS
                         MessageBox.Show("Sửa thành công");
                         updatePhong();
                         txtMaPhong.Clear();
+                        cboTinhTrang.SelectedIndex = -1;
                         cboHang.SelectedIndex = -1;
                         txtSoGiuong.Clear();
                         txtGia.Clear();
                         cboDatTruoc.SelectedIndex = -1;
+                        cboHienThi.SelectedIndex = 0;
                     }
                     else
                     {
@@ -216,9 +247,14 @@ namespace QLKS
 
         private void btnXoa_Click(object sender, EventArgs e)
         {
-            if (string.IsNullOrEmpty(txtMaPhong.Text))
+            if (string.IsNullOrWhiteSpace(txtMaPhong.Text))
             {
                 MessageBox.Show("Vui lòng chọn một Phòng để xóa.");
+                return;
+            }
+            if (!IsMaPhongExist(txtMaPhong.Text))
+            {
+                MessageBox.Show("Mã Phòng không hợp lệ");
                 return;
             }
             try
@@ -237,10 +273,12 @@ namespace QLKS
                     MessageBox.Show("Xóa thành công");
                     updatePhong();
                     txtMaPhong.Clear();
+                    cboTinhTrang.SelectedIndex = -1;
                     cboHang.SelectedIndex = -1;
                     txtSoGiuong.Clear();
                     txtGia.Clear();
                     cboDatTruoc.SelectedIndex = -1;
+                    cboHienThi.SelectedIndex = 0;
                 }
             }
             catch (Exception ex)
@@ -273,6 +311,7 @@ namespace QLKS
             try
             {
                 DataGridViewRow selectedRow = dgvPhong.SelectedRows[0];
+                string maPhong = selectedRow.Cells["MaPhong"].Value.ToString();
                 if (selectedRow.Cells["Gia"].Value == null)
                 {
                     MessageBox.Show("Không tìm thấy Giá.");
@@ -284,13 +323,26 @@ namespace QLKS
                 if (File.Exists(filePath))
                 {
                     string doanhThuText = File.ReadAllText(filePath);
-                    if (!string.IsNullOrEmpty(doanhThuText))
+                    if (!string.IsNullOrWhiteSpace(doanhThuText))
                     {
                         tongDoanhThu = Convert.ToDouble(doanhThuText);
                     }
                 }
                 tongDoanhThu += giaPhong;
                 File.WriteAllText(filePath, tongDoanhThu.ToString());
+                string updateQuery = "UPDATE Phong SET TinhTrang = N'Trống' WHERE MaPhong = @MaPhong";
+                SqlCommand cmd = new SqlCommand(updateQuery, _conn);
+                cmd.Parameters.AddWithValue("@MaPhong", txtMaPhong.Text);
+                if (_conn.State == ConnectionState.Closed)
+                {
+                    _conn.Open();
+                }
+                cmd.ExecuteNonQuery();
+                frmKH frmKhachHang = Application.OpenForms["frmKH"] as frmKH;
+                if (frmKhachHang != null)
+                {
+                    frmKhachHang.xoaKHTheoPhong(maPhong);
+                }
                 MessageBox.Show("Thanh toán thành công. Tổng doanh thu đã được cập nhật.");
             }
             catch (Exception ex)
@@ -302,6 +354,22 @@ namespace QLKS
                 if (_conn.State == ConnectionState.Open)
                 {
                     _conn.Close();
+                }
+            }
+        }
+
+        private void cboHienThi_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (cboHienThi.SelectedIndex != -1)
+            {
+                string hienThi = cboHienThi.SelectedItem.ToString();
+                if (hienThi == "Tất cả")
+                {
+                    updatePhong("Tất cả");
+                }
+                else if (hienThi == "Trống" || hienThi == "Không trống")
+                {
+                    updatePhong(hienThi);
                 }
             }
         }

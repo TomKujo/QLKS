@@ -33,6 +33,7 @@
             txtMK = new TextBox();
             btnDangNhap = new Button();
             lblSai = new Label();
+            btnHien = new Button();
             SuspendLayout();
             // 
             // lblDangNhap
@@ -51,7 +52,7 @@
             txtTK.Location = new Point(12, 43);
             txtTK.Name = "txtTK";
             txtTK.PlaceholderText = "Tài khoản";
-            txtTK.Size = new Size(160, 22);
+            txtTK.Size = new Size(179, 22);
             txtTK.TabIndex = 1;
             // 
             // txtMK
@@ -59,15 +60,16 @@
             txtMK.Location = new Point(12, 71);
             txtMK.Name = "txtMK";
             txtMK.PlaceholderText = "Mật khẩu";
-            txtMK.Size = new Size(160, 22);
+            txtMK.Size = new Size(179, 22);
             txtMK.TabIndex = 2;
             txtMK.UseSystemPasswordChar = true;
+            txtMK.TextChanged += txtMK_TextChanged;
             // 
             // btnDangNhap
             // 
             btnDangNhap.Location = new Point(12, 111);
             btnDangNhap.Name = "btnDangNhap";
-            btnDangNhap.Size = new Size(160, 23);
+            btnDangNhap.Size = new Size(179, 23);
             btnDangNhap.TabIndex = 3;
             btnDangNhap.Text = "Đăng nhập";
             btnDangNhap.UseVisualStyleBackColor = true;
@@ -85,11 +87,23 @@
             lblSai.Text = "Sai";
             lblSai.Visible = false;
             // 
+            // btnHien
+            // 
+            btnHien.Location = new Point(197, 71);
+            btnHien.Name = "btnHien";
+            btnHien.Size = new Size(75, 23);
+            btnHien.TabIndex = 5;
+            btnHien.Text = "Hiện";
+            btnHien.UseVisualStyleBackColor = true;
+            btnHien.Visible = false;
+            btnHien.Click += btnHien_Click;
+            // 
             // frmDangNhap
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(184, 161);
+            ClientSize = new Size(284, 161);
+            Controls.Add(btnHien);
             Controls.Add(lblSai);
             Controls.Add(btnDangNhap);
             Controls.Add(txtMK);
@@ -110,5 +124,6 @@
         private TextBox txtMK;
         private Button btnDangNhap;
         private Label lblSai;
+        private Button btnHien;
     }
 }

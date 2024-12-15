@@ -22,5 +22,15 @@ namespace QLKS
                 lblSai.Text = "Sai tài khoản hoặc mật khẩu";
             }
         }
+
+        private void btnHien_Click(object sender, EventArgs e)
+        {
+            txtMK.UseSystemPasswordChar = !txtMK.UseSystemPasswordChar;
+        }
+
+        private void txtMK_TextChanged(object sender, EventArgs e)
+        {
+            btnHien.Visible = !string.IsNullOrEmpty(txtMK.Text);
+        }
     }
 }

@@ -50,13 +50,9 @@ namespace QLKS
 
         private void loadGioiTinhComboBox()
         {
-            string query = "SELECT * FROM NhanVien";
-            SqlDataAdapter da = new SqlDataAdapter(query, _conn);
-            DataTable dt = new DataTable();
-            da.Fill(dt);
-            cboGioiTinh.DisplayMember = "GioiTinh";
-            cboGioiTinh.ValueMember = "GioiTinh";
-            cboGioiTinh.DataSource = dt;
+            cboGioiTinh.Items.Clear();
+            cboGioiTinh.Items.Add("Nam");
+            cboGioiTinh.Items.Add("Nữ");
         }
 
         private void frmNV_Load(object sender, EventArgs e)
@@ -68,7 +64,7 @@ namespace QLKS
 
         private void dgvNV_RowHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
         {
-            txtMaNV.Text = dgvNV.Rows[e.RowIndex].Cells["MaNV"].Value.ToString();
+            txtMaNV.Text = Convert.ToInt16(dgvNV.Rows[e.RowIndex].Cells["MaNV"].Value).ToString();
             txtTenNV.Text = dgvNV.Rows[e.RowIndex].Cells["TenNV"].Value.ToString();
             txtSDT.Text = dgvNV.Rows[e.RowIndex].Cells["SDT"].Value.ToString();
             cboGioiTinh.SelectedValue = dgvNV.Rows[e.RowIndex].Cells["GioiTinh"].Value.ToString();
@@ -106,7 +102,7 @@ namespace QLKS
 
         private void btnThem_Click(object sender, EventArgs e)
         {
-            if (string.IsNullOrEmpty(txtMaNV.Text) || string.IsNullOrEmpty(txtTenNV.Text) || string.IsNullOrEmpty(txtSDT.Text) || string.IsNullOrEmpty(cboGioiTinh.SelectedValue.ToString()) || string.IsNullOrEmpty(txtTK.Text) || string.IsNullOrEmpty(txtMK.Text))
+            if (string.IsNullOrWhiteSpace(txtMaNV.Text) || string.IsNullOrWhiteSpace(txtTenNV.Text) || string.IsNullOrWhiteSpace(txtSDT.Text) || cboGioiTinh.SelectedItem == null || string.IsNullOrWhiteSpace(txtTK.Text) || string.IsNullOrWhiteSpace(txtMK.Text))
             {
                 MessageBox.Show("Vui lòng nhập đầy đủ Mã Nhân Viên, Tên Nhân Viên, Số Điện Thoại, Giới Tính, Tài Khoản, Mật Khẩu.");
                 return;
@@ -116,14 +112,19 @@ namespace QLKS
                 MessageBox.Show("Mã Nhân Viên đã tồn tại. Vui lòng chọn Mã Nhân Viên khác.");
                 return;
             }
+            if (txtMK.Text != txtXacNhan.Text)
+            {
+                MessageBox.Show("Mật Khẩu và Xác Nhận không trùng khớp.");
+                return;
+            }
             try
             {
                 string insertString = "INSERT INTO NhanVien VALUES(@MaNV, @TenNV, @SDT, @GioiTinh, @TK, @MK)";
                 SqlCommand cmd = new SqlCommand(insertString, _conn);
-                cmd.Parameters.AddWithValue("@MaNV", txtMaNV.Text);
+                cmd.Parameters.AddWithValue("@MaNV", Convert.ToInt16(txtMaNV.Text));
                 cmd.Parameters.AddWithValue("@TenNV", txtTenNV.Text);
                 cmd.Parameters.AddWithValue("@SDT", txtSDT.Text);
-                cmd.Parameters.AddWithValue("@GioiTinh", cboGioiTinh.SelectedValue.ToString());
+                cmd.Parameters.AddWithValue("@GioiTinh", cboGioiTinh.SelectedItem.ToString());
                 cmd.Parameters.AddWithValue("@TK", txtTK.Text);
                 cmd.Parameters.AddWithValue("@MK", txtMK.Text);
                 if (_conn.State == ConnectionState.Closed)
@@ -155,9 +156,14 @@ namespace QLKS
 
         private void btnXoa_Click(object sender, EventArgs e)
         {
-            if (string.IsNullOrEmpty(txtMaNV.Text))
+            if (string.IsNullOrWhiteSpace(txtMaNV.Text))
             {
                 MessageBox.Show("Vui lòng chọn một Nhân Viên để xóa.");
+                return;
+            }
+            if (!IsMaNVExist(txtMaNV.Text))
+            {
+                MessageBox.Show("Mã Nhân Viên không hợp lệ");
                 return;
             }
             try
@@ -198,9 +204,19 @@ namespace QLKS
 
         private void btnSua_Click(object sender, EventArgs e)
         {
-            if (string.IsNullOrEmpty(txtMaNV.Text))
+            if (string.IsNullOrWhiteSpace(txtMaNV.Text))
             {
                 MessageBox.Show("Vui lòng chọn một Nhân Viên để sửa và nhập Tên Nhân Viên, Số Điện Thoại, Giới Tính, Tài Khoản, Mật Khẩu mới.");
+                return;
+            }
+            if (!IsMaNVExist(txtMaNV.Text))
+            {
+                MessageBox.Show("Mã Nhân Viên không hợp lệ");
+                return;
+            }
+            if (txtMK.Text != txtXacNhan.Text)
+            {
+                MessageBox.Show("Mật Khẩu và Xác Nhận không trùng khớp.");
                 return;
             }
             try
@@ -211,7 +227,7 @@ namespace QLKS
                     sqlCommand.Parameters.AddWithValue("@MaNV", txtMaNV.Text);
                     sqlCommand.Parameters.AddWithValue("@TenNVMoi", txtTenNV.Text);
                     sqlCommand.Parameters.AddWithValue("@SDTMoi", txtSDT.Text);
-                    sqlCommand.Parameters.AddWithValue("@GioiTinhMoi", cboGioiTinh.SelectedValue.ToString());
+                    sqlCommand.Parameters.AddWithValue("@GioiTinhMoi", cboGioiTinh.SelectedItem.ToString());
                     sqlCommand.Parameters.AddWithValue("@TKMoi", txtTK.Text);
                     sqlCommand.Parameters.AddWithValue("@MKMoi", txtMK.Text);
                     if (_conn.State == ConnectionState.Closed)
@@ -254,6 +270,26 @@ namespace QLKS
             frmChucNang frmChucNang = new frmChucNang();
             frmChucNang.Show();
             //this.Hide();
+        }
+
+        private void btnHien1_Click(object sender, EventArgs e)
+        {
+            txtMK.UseSystemPasswordChar = !txtMK.UseSystemPasswordChar;
+        }
+
+        private void btnHien2_Click(object sender, EventArgs e)
+        {
+            txtXacNhan.UseSystemPasswordChar = !txtXacNhan.UseSystemPasswordChar;
+        }
+
+        private void txtMK_TextChanged(object sender, EventArgs e)
+        {
+            btnHien1.Visible = !string.IsNullOrWhiteSpace(txtMK.Text);
+        }
+
+        private void txtXacNhan_TextChanged(object sender, EventArgs e)
+        {
+            btnHien2.Visible = !string.IsNullOrWhiteSpace(txtXacNhan.Text);
         }
     }
 }

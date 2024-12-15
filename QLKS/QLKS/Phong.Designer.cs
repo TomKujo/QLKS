@@ -39,6 +39,8 @@
             btnTroVe = new Button();
             txtMaPhong = new TextBox();
             btnThanhToan = new Button();
+            cboHienThi = new ComboBox();
+            cboTinhTrang = new ComboBox();
             ((System.ComponentModel.ISupportInitialize)dgvPhong).BeginInit();
             SuspendLayout();
             // 
@@ -144,11 +146,33 @@
             btnThanhToan.UseVisualStyleBackColor = true;
             btnThanhToan.Click += btnThanhToan_Click;
             // 
+            // cboHienThi
+            // 
+            cboHienThi.FormattingEnabled = true;
+            cboHienThi.Items.AddRange(new object[] { "Tất cả", "Trống", "Không trống" });
+            cboHienThi.Location = new Point(139, 340);
+            cboHienThi.Name = "cboHienThi";
+            cboHienThi.Size = new Size(208, 23);
+            cboHienThi.TabIndex = 11;
+            cboHienThi.SelectedIndexChanged += cboHienThi_SelectedIndexChanged;
+            //cboHienThi.SelectedValueChanged += cboHienThi_SelectedValueChanged;
+            // 
+            // cboTinhTrang
+            // 
+            cboTinhTrang.FormattingEnabled = true;
+            cboTinhTrang.Items.AddRange(new object[] { "Trống", "Không trống" });
+            cboTinhTrang.Location = new Point(139, 168);
+            cboTinhTrang.Name = "cboTinhTrang";
+            cboTinhTrang.Size = new Size(121, 23);
+            cboTinhTrang.TabIndex = 12;
+            // 
             // frmPhong
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(359, 386);
+            Controls.Add(cboTinhTrang);
+            Controls.Add(cboHienThi);
             Controls.Add(btnThanhToan);
             Controls.Add(btnTroVe);
             Controls.Add(btnSua);
@@ -183,5 +207,7 @@
         private Button btnTroVe;
         private TextBox txtMaPhong;
         private Button btnThanhToan;
+        private ComboBox cboHienThi;
+        private ComboBox cboTinhTrang;
     }
 }

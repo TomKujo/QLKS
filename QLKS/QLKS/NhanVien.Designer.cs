@@ -39,6 +39,9 @@
             btnSua = new Button();
             btnXoa = new Button();
             btnThem = new Button();
+            txtXacNhan = new TextBox();
+            btnHien2 = new Button();
+            btnHien1 = new Button();
             ((System.ComponentModel.ISupportInitialize)dgvNV).BeginInit();
             SuspendLayout();
             // 
@@ -93,6 +96,7 @@
             txtMK.Size = new Size(203, 22);
             txtMK.TabIndex = 10;
             txtMK.UseSystemPasswordChar = true;
+            txtMK.TextChanged += txtMK_TextChanged;
             // 
             // txtTK
             // 
@@ -142,11 +146,46 @@
             btnThem.UseVisualStyleBackColor = true;
             btnThem.Click += btnThem_Click;
             // 
+            // txtXacNhan
+            // 
+            txtXacNhan.Location = new Point(12, 309);
+            txtXacNhan.Name = "txtXacNhan";
+            txtXacNhan.PlaceholderText = "Xác nhận mật khẩu";
+            txtXacNhan.Size = new Size(126, 22);
+            txtXacNhan.TabIndex = 23;
+            txtXacNhan.UseSystemPasswordChar = true;
+            txtXacNhan.TextChanged += txtXacNhan_TextChanged;
+            // 
+            // btnHien2
+            // 
+            btnHien2.Location = new Point(12, 280);
+            btnHien2.Name = "btnHien2";
+            btnHien2.Size = new Size(75, 23);
+            btnHien2.TabIndex = 24;
+            btnHien2.Text = "Hiện";
+            btnHien2.UseVisualStyleBackColor = true;
+            btnHien2.Visible = false;
+            btnHien2.Click += btnHien2_Click;
+            // 
+            // btnHien1
+            // 
+            btnHien1.Location = new Point(12, 251);
+            btnHien1.Name = "btnHien1";
+            btnHien1.Size = new Size(75, 23);
+            btnHien1.TabIndex = 25;
+            btnHien1.Text = "Hiện";
+            btnHien1.UseVisualStyleBackColor = true;
+            btnHien1.Visible = false;
+            btnHien1.Click += btnHien1_Click;
+            // 
             // frmNV
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(359, 386);
+            Controls.Add(btnHien1);
+            Controls.Add(btnHien2);
+            Controls.Add(txtXacNhan);
             Controls.Add(btnTroVe);
             Controls.Add(btnSua);
             Controls.Add(btnXoa);
@@ -181,5 +220,8 @@
         private Button btnSua;
         private Button btnXoa;
         private Button btnThem;
+        private TextBox txtXacNhan;
+        private Button btnHien2;
+        private Button btnHien1;
     }
 }

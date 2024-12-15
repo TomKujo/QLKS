@@ -50,13 +50,9 @@ namespace QLKS
 
         private void loadGioiTinhComboBox()
         {
-            string query = "SELECT * FROM KhachHang";
-            SqlDataAdapter da = new SqlDataAdapter(query, _conn);
-            DataTable dt = new DataTable();
-            da.Fill(dt);
-            cboGioiTinh.DisplayMember = "GioiTinh";
-            cboGioiTinh.ValueMember = "GioiTinh";
-            cboGioiTinh.DataSource = dt;
+            cboGioiTinh.Items.Clear();
+            cboGioiTinh.Items.Add("Nam");
+            cboGioiTinh.Items.Add("Nữ");
         }
 
         private void loadMaPhongComboBox()
@@ -81,16 +77,37 @@ namespace QLKS
 
         private void dgvKH_RowHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
         {
-            txtMaKH.Text = dgvKH.Rows[e.RowIndex].Cells["MaKH"].Value.ToString();
+            txtMaKH.Text = Convert.ToInt16(dgvKH.Rows[e.RowIndex].Cells["MaKH"].Value).ToString();
             txtTenKH.Text = dgvKH.Rows[e.RowIndex].Cells["TenKH"].Value.ToString();
             txtSDT.Text = dgvKH.Rows[e.RowIndex].Cells["SDT"].Value.ToString();
             txtQuocTich.Text = dgvKH.Rows[e.RowIndex].Cells["QuocTich"].Value.ToString();
             cboGioiTinh.SelectedValue = dgvKH.Rows[e.RowIndex].Cells["GioiTinh"].Value.ToString();
-            dateTimePickerNgaySinh.Value = Convert.ToDateTime(dgvKH.Rows[e.RowIndex].Cells["NgaySinh"].Value);
+            if (DateTime.TryParse(dgvKH.Rows[e.RowIndex].Cells["NgaySinh"].Value.ToString(), out DateTime ngaySinh))
+            {
+                dateTimePickerNgaySinh.Value = ngaySinh;
+            }
+            else
+            {
+                MessageBox.Show("Ngày Sinh không hợp lệ.");
+            }
             txtCCCD.Text = dgvKH.Rows[e.RowIndex].Cells["CCCD"].Value.ToString();
             txtDiaChi.Text = dgvKH.Rows[e.RowIndex].Cells["DiaChi"].Value.ToString();
-            dateTimePickerNhan.Value = Convert.ToDateTime(dgvKH.Rows[e.RowIndex].Cells["ThoiGianNhanPhong"].Value);
-            dateTimePickerTra.Value = Convert.ToDateTime(dgvKH.Rows[e.RowIndex].Cells["ThoiGianTraPhong"].Value);
+            if (DateTime.TryParse(dgvKH.Rows[e.RowIndex].Cells["ThoiGianNhanPhong"].Value.ToString(), out DateTime thoiGianNhanPhong))
+            {
+                dateTimePickerNhan.Value = thoiGianNhanPhong;
+            }
+            else
+            {
+                MessageBox.Show("Thời Gian Nhận Phòng không hợp lệ.");
+            }
+            if (DateTime.TryParse(dgvKH.Rows[e.RowIndex].Cells["ThoiGianTraPhong"].Value.ToString(), out DateTime thoiGianTraPhong))
+            {
+                dateTimePickerTra.Value = thoiGianTraPhong;
+            }
+            else
+            {
+                MessageBox.Show("Thời Gian Trả Phòng Không hợp lệ.");
+            }
             cboMaPhong.SelectedValue = dgvKH.Rows[e.RowIndex].Cells["MaPhong"].Value.ToString();
         }
 
@@ -124,7 +141,7 @@ namespace QLKS
 
         private void btnThem_Click(object sender, EventArgs e)
         {
-            if (string.IsNullOrEmpty(txtMaKH.Text) || string.IsNullOrEmpty(txtTenKH.Text) || string.IsNullOrEmpty(txtSDT.Text) || string.IsNullOrEmpty(txtQuocTich.Text) || string.IsNullOrEmpty(cboGioiTinh.SelectedValue.ToString()) || string.IsNullOrEmpty(dateTimePickerNgaySinh.Value.ToString()) || string.IsNullOrEmpty(txtCCCD.Text) || string.IsNullOrEmpty(txtDiaChi.Text) || string.IsNullOrEmpty(dateTimePickerNhan.Value.ToString()) || string.IsNullOrEmpty(dateTimePickerTra.Value.ToString()) || string.IsNullOrEmpty(cboMaPhong.SelectedValue.ToString()))
+            if (string.IsNullOrWhiteSpace(txtMaKH.Text) || string.IsNullOrWhiteSpace(txtTenKH.Text) || string.IsNullOrWhiteSpace(txtSDT.Text) || string.IsNullOrWhiteSpace(txtQuocTich.Text) || cboGioiTinh.SelectedItem == null || string.IsNullOrWhiteSpace(dateTimePickerNgaySinh.Value.ToString()) || string.IsNullOrWhiteSpace(txtCCCD.Text) || string.IsNullOrWhiteSpace(txtDiaChi.Text) || string.IsNullOrWhiteSpace(dateTimePickerNhan.Value.ToString()) || string.IsNullOrWhiteSpace(dateTimePickerTra.Value.ToString()) || cboMaPhong.SelectedItem == null)
             {
                 MessageBox.Show("Vui lòng nhập đầy đủ Mã Khách Hàng, Tên Khách Hàng, Số Điện Thoại, Quốc Tịch, Giới Tính, Ngày Sinh, Căn Cước Công Dân, Địa Chỉ, Thời Gian Nhận Phòng, Thời Gian Trả Phòng, Mã Phòng.");
                 return;
@@ -136,24 +153,43 @@ namespace QLKS
             }
             try
             {
+                if (!int.TryParse(txtMaKH.Text, out int maKH))
+                {
+                    MessageBox.Show("Mã Khách Hàng không hợp lệ.");
+                    return;
+                }
+                if (cboMaPhong.SelectedValue == null || !int.TryParse(cboMaPhong.SelectedValue.ToString(), out int maPhong))
+                {
+                    MessageBox.Show("Mã Phòng không hợp lệ.");
+                    return;
+                }
                 string insertString = "INSERT INTO KhachHang VALUES(@MaKH, @TenKH, @SDT, @QuocTich, @GioiTinh, @NgaySinh, @CCCD, @DiaChi, @ThoiGianNhanPhong, @ThoiGianTraPhong, @MaPhong)";
                 SqlCommand cmd = new SqlCommand(insertString, _conn);
-                cmd.Parameters.AddWithValue("@MaKH", txtMaKH.Text);
+                cmd.Parameters.AddWithValue("@MaKH", maKH);
                 cmd.Parameters.AddWithValue("@TenKH", txtTenKH.Text);
                 cmd.Parameters.AddWithValue("@SDT", txtSDT.Text);
                 cmd.Parameters.AddWithValue("@QuocTich", txtQuocTich.Text);
-                cmd.Parameters.AddWithValue("@GioiTinh", cboGioiTinh.SelectedValue.ToString());
-                cmd.Parameters.AddWithValue("@NgaySinh", dateTimePickerNgaySinh.Value.ToString());
+                cmd.Parameters.AddWithValue("@GioiTinh", cboGioiTinh.SelectedItem.ToString());
+                cmd.Parameters.AddWithValue("@NgaySinh", dateTimePickerNgaySinh.Value);
                 cmd.Parameters.AddWithValue("@CCCD", txtCCCD.Text);
                 cmd.Parameters.AddWithValue("@DiaChi", txtDiaChi.Text);
-                cmd.Parameters.AddWithValue("@ThoiGianNhanPhong", dateTimePickerNhan.Value.ToString());
-                cmd.Parameters.AddWithValue("@ThoiGianTraPhong", dateTimePickerTra.Value.ToString());
-                cmd.Parameters.AddWithValue("@MaPhong", cboMaPhong.SelectedValue.ToString());
+                cmd.Parameters.AddWithValue("@ThoiGianNhanPhong", dateTimePickerNhan.Value);
+                cmd.Parameters.AddWithValue("@ThoiGianTraPhong", dateTimePickerTra.Value);
+                cmd.Parameters.AddWithValue("@MaPhong", maPhong);
                 if (_conn.State == ConnectionState.Closed)
                 {
                     _conn.Open();
                 }
                 cmd.ExecuteNonQuery();
+                string updateTinhTrangQuery = "UPDATE Phong SET TinhTrang = N'Không Trống' WHERE MaPhong = @MaPhong";
+                SqlCommand updateCmd = new SqlCommand(updateTinhTrangQuery, _conn);
+                updateCmd.Parameters.AddWithValue("@MaPhong", maPhong);
+                updateCmd.ExecuteNonQuery();
+                frmPhong frm = Application.OpenForms["frmPhong"] as frmPhong;
+                if (frm != null)
+                {
+                    frm.updatePhong();
+                }
                 MessageBox.Show("Thêm thành công");
                 updateKH();
                 txtMaKH.Clear();
@@ -183,9 +219,14 @@ namespace QLKS
 
         private void btnXoa_Click(object sender, EventArgs e)
         {
-            if (string.IsNullOrEmpty(txtMaKH.Text))
+            if (string.IsNullOrWhiteSpace(txtMaKH.Text))
             {
                 MessageBox.Show("Vui lòng chọn một Khách Hàng để xóa.");
+                return;
+            }
+            if (!IsMaKHExist(txtMaKH.Text))
+            {
+                MessageBox.Show("Mã Khách Hàng không hợp lệ");
                 return;
             }
             try
@@ -231,13 +272,23 @@ namespace QLKS
 
         private void btnSua_Click(object sender, EventArgs e)
         {
-            if (string.IsNullOrEmpty(txtMaKH.Text))
+            if (string.IsNullOrWhiteSpace(txtMaKH.Text))
             {
                 MessageBox.Show("Vui lòng chọn một Khách Hàng để sửa và nhập Tên Khách Hàng, Số Điện Thoại, Quốc Tịch, Giới Tính, Ngày Sinh, Căn Cước Công Dân, Địa Chỉ, Thời Gian Nhận Phòng, Thời Gian Trả Phòng, Mã Phòng mới.");
                 return;
             }
+            if (!IsMaKHExist(txtMaKH.Text))
+            {
+                MessageBox.Show("Mã Khách Hàng không hợp lệ");
+                return;
+            }
             try
             {
+                if (cboMaPhong.SelectedItem == null || !int.TryParse(cboMaPhong.SelectedValue.ToString(), out int maPhong))
+                {
+                    MessageBox.Show("Mã Phòng không hợp lệ.");
+                    return;
+                }
                 string query = "UPDATE KhachHang SET TenKH = @TenKHMoi, SDT = @SDTMoi, QuocTich = @QuocTichMoi, GioiTinh = @GioiTinhMoi, NgaySinh = @NgaySinhMoi, CCCD = @CCCDMoi, DiaChi = @DiaChiMoi, ThoiGianNhanPhong = @ThoiGianNhanPhongMoi, ThoiGianTraPhong = @ThoiGianTraPhongMoi, MaPhong = @MaPhongMoi WHERE MaKH = @MaKH";
                 using (SqlCommand sqlCommand = new SqlCommand(query, _conn))
                 {
@@ -245,13 +296,13 @@ namespace QLKS
                     sqlCommand.Parameters.AddWithValue("@TenKHMoi", txtTenKH.Text);
                     sqlCommand.Parameters.AddWithValue("@SDTMoi", txtSDT.Text);
                     sqlCommand.Parameters.AddWithValue("@QuocTichMoi", txtQuocTich.Text);
-                    sqlCommand.Parameters.AddWithValue("@GioiTinhMoi", cboGioiTinh.SelectedValue.ToString());
-                    sqlCommand.Parameters.AddWithValue("@NgaySinhMoi", dateTimePickerNgaySinh.Value.ToString());
+                    sqlCommand.Parameters.AddWithValue("@GioiTinhMoi", cboGioiTinh.SelectedItem.ToString());
+                    sqlCommand.Parameters.AddWithValue("@NgaySinhMoi", dateTimePickerNgaySinh.Value);
                     sqlCommand.Parameters.AddWithValue("@CCCDMoi", txtCCCD.Text);
                     sqlCommand.Parameters.AddWithValue("@DiaChiMoi", txtDiaChi.Text);
-                    sqlCommand.Parameters.AddWithValue("@ThoiGianNhanPhongMoi", dateTimePickerNhan.Value.ToString());
-                    sqlCommand.Parameters.AddWithValue("@ThoiGianTraPhongMoi", dateTimePickerTra.Value.ToString());
-                    sqlCommand.Parameters.AddWithValue("@MaPhongMoi", cboMaPhong.SelectedValue.ToString());
+                    sqlCommand.Parameters.AddWithValue("@ThoiGianNhanPhongMoi", dateTimePickerNhan.Value);
+                    sqlCommand.Parameters.AddWithValue("@ThoiGianTraPhongMoi", dateTimePickerTra.Value);
+                    sqlCommand.Parameters.AddWithValue("@MaPhongMoi", maPhong);
                     if (_conn.State == ConnectionState.Closed)
                     {
                         _conn.Open();
@@ -259,6 +310,12 @@ namespace QLKS
                     int rowsAffected = sqlCommand.ExecuteNonQuery();
                     if (rowsAffected > 0)
                     {
+                        string updateTinhTrangQuery = "UPDATE Phong SET TinhTrang = N'Không trống' WHERE MaPhong = @MaPhong";
+                        using (SqlCommand updateCmd = new SqlCommand(updateTinhTrangQuery, _conn))
+                        {
+                            updateCmd.Parameters.AddWithValue("@MaPhong", maPhong);
+                            updateCmd.ExecuteNonQuery();
+                        }
                         MessageBox.Show("Sửa thành công");
                         updateKH();
                         txtMaKH.Clear();
@@ -297,6 +354,37 @@ namespace QLKS
             frmChucNang frmChucNang = new frmChucNang();
             frmChucNang.Show();
             //this.Hide();
+        }
+
+        public void xoaKHTheoPhong(string maPhong)
+        {
+            try
+            {
+                if (_conn.State == ConnectionState.Closed)
+                {
+                    _conn.Open();
+                }
+                string deleteQuery = "DELETE FROM KhachHang WHERE MaPhong = @MaPhong";
+                SqlCommand cmd = new SqlCommand(deleteQuery, _conn);
+                cmd.Parameters.AddWithValue("@MaPhong", maPhong);
+                int rowsAffected = cmd.ExecuteNonQuery();
+                if (rowsAffected > 0)
+                {
+                    MessageBox.Show("Đã xóa " + rowsAffected + " khách hàng khỏi Mã Phòng " + maPhong + ".");
+                }
+                updateKH();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Lỗi khi xóa khách hàng: " + ex.Message);
+            }
+            finally
+            {
+                if (_conn.State == ConnectionState.Open)
+                {
+                    _conn.Close();
+                }
+            }
         }
     }
 }
