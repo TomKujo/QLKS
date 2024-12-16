@@ -55,3 +55,4 @@ C:\Users\Admin\Documents\LTWins\QLKS-main\QLKS-main\QLKS\QLKS\obj\Debug\net6.0-w
 C:\Users\Admin\Documents\LTWins\QLKS-main\QLKS-main\QLKS\QLKS\obj\Debug\net6.0-windows\QLKS.genruntimeconfig.cache
 C:\Users\Admin\Documents\LTWins\QLKS-main\QLKS-main\QLKS\QLKS\obj\Debug\net6.0-windows\ref\QLKS.dll
 C:\Users\Admin\Documents\LTWins\QLKS-main\QLKS-main\QLKS\QLKS\obj\Debug\net6.0-windows\QLKS.Properties.Resources.resources
+C:\Users\Admin\Documents\LTWins\QLKS-main\QLKS-main\QLKS\QLKS\obj\Debug\net6.0-windows\QLKS.sourcelink.json

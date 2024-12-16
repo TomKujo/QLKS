@@ -64,7 +64,12 @@ namespace QLKS
         {
             frmDangNhap frmDangNhap = new frmDangNhap();
             frmDangNhap.Show();
-            //this.Hide();
+            //this.Close();
+        }
+
+        private void flowLayoutPanel1_Paint(object sender, PaintEventArgs e)
+        {
+
         }
     }
 }
