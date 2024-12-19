@@ -1,0 +1,12 @@
+C:\Users\Admin\Documents\LTWins\QLKS-main\QLKS-main\QLKS\QLKSDTO\bin\Debug\net8.0\QLKSDTO.deps.json
+C:\Users\Admin\Documents\LTWins\QLKS-main\QLKS-main\QLKS\QLKSDTO\bin\Debug\net8.0\QLKSDTO.dll
+C:\Users\Admin\Documents\LTWins\QLKS-main\QLKS-main\QLKS\QLKSDTO\bin\Debug\net8.0\QLKSDTO.pdb
+C:\Users\Admin\Documents\LTWins\QLKS-main\QLKS-main\QLKS\QLKSDTO\obj\Debug\net8.0\QLKSDTO.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Admin\Documents\LTWins\QLKS-main\QLKS-main\QLKS\QLKSDTO\obj\Debug\net8.0\QLKSDTO.AssemblyInfoInputs.cache
+C:\Users\Admin\Documents\LTWins\QLKS-main\QLKS-main\QLKS\QLKSDTO\obj\Debug\net8.0\QLKSDTO.AssemblyInfo.cs
+C:\Users\Admin\Documents\LTWins\QLKS-main\QLKS-main\QLKS\QLKSDTO\obj\Debug\net8.0\QLKSDTO.csproj.CoreCompileInputs.cache
+C:\Users\Admin\Documents\LTWins\QLKS-main\QLKS-main\QLKS\QLKSDTO\obj\Debug\net8.0\QLKSDTO.sourcelink.json
+C:\Users\Admin\Documents\LTWins\QLKS-main\QLKS-main\QLKS\QLKSDTO\obj\Debug\net8.0\QLKSDTO.dll
+C:\Users\Admin\Documents\LTWins\QLKS-main\QLKS-main\QLKS\QLKSDTO\obj\Debug\net8.0\refint\QLKSDTO.dll
+C:\Users\Admin\Documents\LTWins\QLKS-main\QLKS-main\QLKS\QLKSDTO\obj\Debug\net8.0\QLKSDTO.pdb
+C:\Users\Admin\Documents\LTWins\QLKS-main\QLKS-main\QLKS\QLKSDTO\obj\Debug\net8.0\ref\QLKSDTO.dll

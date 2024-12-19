@@ -1,0 +1,16 @@
+C:\Users\Admin\Documents\LTWins\QLKS-main\QLKS-main\QLKS\QLKSDAO\bin\Debug\net8.0\QLKSDAO.deps.json
+C:\Users\Admin\Documents\LTWins\QLKS-main\QLKS-main\QLKS\QLKSDAO\bin\Debug\net8.0\QLKSDAO.dll
+C:\Users\Admin\Documents\LTWins\QLKS-main\QLKS-main\QLKS\QLKSDAO\bin\Debug\net8.0\QLKSDAO.pdb
+C:\Users\Admin\Documents\LTWins\QLKS-main\QLKS-main\QLKS\QLKSDAO\bin\Debug\net8.0\QLKSDTO.dll
+C:\Users\Admin\Documents\LTWins\QLKS-main\QLKS-main\QLKS\QLKSDAO\bin\Debug\net8.0\QLKSDTO.pdb
+C:\Users\Admin\Documents\LTWins\QLKS-main\QLKS-main\QLKS\QLKSDAO\obj\Debug\net8.0\QLKSDAO.csproj.AssemblyReference.cache
+C:\Users\Admin\Documents\LTWins\QLKS-main\QLKS-main\QLKS\QLKSDAO\obj\Debug\net8.0\QLKSDAO.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Admin\Documents\LTWins\QLKS-main\QLKS-main\QLKS\QLKSDAO\obj\Debug\net8.0\QLKSDAO.AssemblyInfoInputs.cache
+C:\Users\Admin\Documents\LTWins\QLKS-main\QLKS-main\QLKS\QLKSDAO\obj\Debug\net8.0\QLKSDAO.AssemblyInfo.cs
+C:\Users\Admin\Documents\LTWins\QLKS-main\QLKS-main\QLKS\QLKSDAO\obj\Debug\net8.0\QLKSDAO.csproj.CoreCompileInputs.cache
+C:\Users\Admin\Documents\LTWins\QLKS-main\QLKS-main\QLKS\QLKSDAO\obj\Debug\net8.0\QLKSDAO.sourcelink.json
+C:\Users\Admin\Documents\LTWins\QLKS-main\QLKS-main\QLKS\QLKSDAO\obj\Debug\net8.0\QLKSDAO.csproj.Up2Date
+C:\Users\Admin\Documents\LTWins\QLKS-main\QLKS-main\QLKS\QLKSDAO\obj\Debug\net8.0\QLKSDAO.dll
+C:\Users\Admin\Documents\LTWins\QLKS-main\QLKS-main\QLKS\QLKSDAO\obj\Debug\net8.0\refint\QLKSDAO.dll
+C:\Users\Admin\Documents\LTWins\QLKS-main\QLKS-main\QLKS\QLKSDAO\obj\Debug\net8.0\QLKSDAO.pdb
+C:\Users\Admin\Documents\LTWins\QLKS-main\QLKS-main\QLKS\QLKSDAO\obj\Debug\net8.0\ref\QLKSDAO.dll
