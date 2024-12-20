@@ -3,12 +3,32 @@
   "WorkspaceRootPath": "C:\\Users\\Admin\\Documents\\LTWins\\QLKS-main\\QLKS-main\\QLKS\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{7F813703-0FFA-49FD-B359-9B0DFD24E1C5}|QLKS\\QLKS.csproj|c:\\users\\admin\\documents\\ltwins\\qlks-main\\qlks-main\\qlks\\qlks\\chucnanggui.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{7F813703-0FFA-49FD-B359-9B0DFD24E1C5}|QLKS\\QLKS.csproj|solutionrelative:qlks\\chucnanggui.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{7F813703-0FFA-49FD-B359-9B0DFD24E1C5}|QLKS\\QLKS.csproj|c:\\users\\admin\\documents\\ltwins\\qlks-main\\qlks-main\\qlks\\qlks\\nhanvienpage.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7F813703-0FFA-49FD-B359-9B0DFD24E1C5}|QLKS\\QLKS.csproj|solutionrelative:qlks\\nhanvienpage.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{7F813703-0FFA-49FD-B359-9B0DFD24E1C5}|QLKS\\QLKS.csproj|C:\\Users\\Admin\\Documents\\LTWins\\QLKS-main\\QLKS-main\\QLKS\\qlks\\nhanvienpage.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
       "RelativeMoniker": "D:0:0:{7F813703-0FFA-49FD-B359-9B0DFD24E1C5}|QLKS\\QLKS.csproj|solutionrelative:qlks\\nhanvienpage.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7F813703-0FFA-49FD-B359-9B0DFD24E1C5}|QLKS\\QLKS.csproj|c:\\users\\admin\\documents\\ltwins\\qlks-main\\qlks-main\\qlks\\qlks\\model\\vitri.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7F813703-0FFA-49FD-B359-9B0DFD24E1C5}|QLKS\\QLKS.csproj|solutionrelative:qlks\\model\\vitri.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7F813703-0FFA-49FD-B359-9B0DFD24E1C5}|QLKS\\QLKS.csproj|c:\\users\\admin\\documents\\ltwins\\qlks-main\\qlks-main\\qlks\\qlks\\model\\phong.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7F813703-0FFA-49FD-B359-9B0DFD24E1C5}|QLKS\\QLKS.csproj|solutionrelative:qlks\\model\\phong.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7F813703-0FFA-49FD-B359-9B0DFD24E1C5}|QLKS\\QLKS.csproj|c:\\users\\admin\\documents\\ltwins\\qlks-main\\qlks-main\\qlks\\qlks\\model\\nhanvien.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7F813703-0FFA-49FD-B359-9B0DFD24E1C5}|QLKS\\QLKS.csproj|solutionrelative:qlks\\model\\nhanvien.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7F813703-0FFA-49FD-B359-9B0DFD24E1C5}|QLKS\\QLKS.csproj|c:\\users\\admin\\documents\\ltwins\\qlks-main\\qlks-main\\qlks\\qlks\\qlks.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
+      "RelativeMoniker": "D:0:0:{7F813703-0FFA-49FD-B359-9B0DFD24E1C5}|QLKS\\QLKS.csproj|solutionrelative:qlks\\qlks.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7F813703-0FFA-49FD-B359-9B0DFD24E1C5}|QLKS\\QLKS.csproj|c:\\users\\admin\\documents\\ltwins\\qlks-main\\qlks-main\\qlks\\qlks\\chucnanggui.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7F813703-0FFA-49FD-B359-9B0DFD24E1C5}|QLKS\\QLKS.csproj|solutionrelative:qlks\\chucnanggui.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{7F813703-0FFA-49FD-B359-9B0DFD24E1C5}|QLKS\\QLKS.csproj|c:\\users\\admin\\documents\\ltwins\\qlks-main\\qlks-main\\qlks\\qlks\\khachhangpage.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -23,7 +43,7 @@
       "RelativeMoniker": "D:0:0:{7F813703-0FFA-49FD-B359-9B0DFD24E1C5}|QLKS\\QLKS.csproj|solutionrelative:qlks\\nhanvienpage.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{7F813703-0FFA-49FD-B359-9B0DFD24E1C5}|QLKS\\QLKS.csproj|c:\\users\\admin\\documents\\ltwins\\qlks-main\\qlks-main\\qlks\\qlks\\chucnanggui.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "AbsoluteMoniker": "D:0:0:{7F813703-0FFA-49FD-B359-9B0DFD24E1C5}|QLKS\\QLKS.csproj|C:\\Users\\Admin\\Documents\\LTWins\\QLKS-main\\QLKS-main\\QLKS\\qlks\\chucnanggui.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
       "RelativeMoniker": "D:0:0:{7F813703-0FFA-49FD-B359-9B0DFD24E1C5}|QLKS\\QLKS.csproj|solutionrelative:qlks\\chucnanggui.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
     },
     {
@@ -31,16 +51,8 @@
       "RelativeMoniker": "D:0:0:{7F813703-0FFA-49FD-B359-9B0DFD24E1C5}|QLKS\\QLKS.csproj|solutionrelative:qlks\\dashboardpage.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{7F813703-0FFA-49FD-B359-9B0DFD24E1C5}|QLKS\\QLKS.csproj|c:\\users\\admin\\documents\\ltwins\\qlks-main\\qlks-main\\qlks\\qlks\\dashboardpage.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "AbsoluteMoniker": "D:0:0:{7F813703-0FFA-49FD-B359-9B0DFD24E1C5}|QLKS\\QLKS.csproj|C:\\Users\\Admin\\Documents\\LTWins\\QLKS-main\\QLKS-main\\QLKS\\qlks\\dashboardpage.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
       "RelativeMoniker": "D:0:0:{7F813703-0FFA-49FD-B359-9B0DFD24E1C5}|QLKS\\QLKS.csproj|solutionrelative:qlks\\dashboardpage.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{7F813703-0FFA-49FD-B359-9B0DFD24E1C5}|QLKS\\QLKS.csproj|c:\\users\\admin\\documents\\ltwins\\qlks-main\\qlks-main\\qlks\\qlks\\nhanvienpage.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{7F813703-0FFA-49FD-B359-9B0DFD24E1C5}|QLKS\\QLKS.csproj|solutionrelative:qlks\\nhanvienpage.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{7F813703-0FFA-49FD-B359-9B0DFD24E1C5}|QLKS\\QLKS.csproj|c:\\users\\admin\\documents\\ltwins\\qlks-main\\qlks-main\\qlks\\qlks\\nhanvien.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{7F813703-0FFA-49FD-B359-9B0DFD24E1C5}|QLKS\\QLKS.csproj|solutionrelative:qlks\\nhanvien.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{7F813703-0FFA-49FD-B359-9B0DFD24E1C5}|QLKS\\QLKS.csproj|C:\\Users\\Admin\\Documents\\LTWins\\QLKS-main\\QLKS-main\\QLKS\\qlks\\phongpage.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
@@ -59,8 +71,8 @@
       "RelativeMoniker": "D:0:0:{7F813703-0FFA-49FD-B359-9B0DFD24E1C5}|QLKS\\QLKS.csproj|solutionrelative:qlks\\khachhangpage.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{7F813703-0FFA-49FD-B359-9B0DFD24E1C5}|QLKS\\QLKS.csproj|c:\\users\\admin\\documents\\ltwins\\qlks-main\\qlks-main\\qlks\\qlks\\loaiphong.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{7F813703-0FFA-49FD-B359-9B0DFD24E1C5}|QLKS\\QLKS.csproj|solutionrelative:qlks\\loaiphong.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{7F813703-0FFA-49FD-B359-9B0DFD24E1C5}|QLKS\\QLKS.csproj|c:\\users\\admin\\documents\\ltwins\\qlks-main\\qlks-main\\qlks\\qlks\\model\\loaiphong.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7F813703-0FFA-49FD-B359-9B0DFD24E1C5}|QLKS\\QLKS.csproj|solutionrelative:qlks\\model\\loaiphong.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -70,11 +82,50 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 7,
+          "SelectedChildIndex": 8,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 2,
+              "Title": "ViTri.cs",
+              "DocumentMoniker": "C:\\Users\\Admin\\Documents\\LTWins\\QLKS-main\\QLKS-main\\QLKS\\QLKS\\Model\\ViTri.cs",
+              "RelativeDocumentMoniker": "QLKS\\Model\\ViTri.cs",
+              "ToolTip": "C:\\Users\\Admin\\Documents\\LTWins\\QLKS-main\\QLKS-main\\QLKS\\QLKS\\Model\\ViTri.cs",
+              "RelativeToolTip": "QLKS\\Model\\ViTri.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-12-20T10:10:43.815Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "Phong.cs",
+              "DocumentMoniker": "C:\\Users\\Admin\\Documents\\LTWins\\QLKS-main\\QLKS-main\\QLKS\\QLKS\\Model\\Phong.cs",
+              "RelativeDocumentMoniker": "QLKS\\Model\\Phong.cs",
+              "ToolTip": "C:\\Users\\Admin\\Documents\\LTWins\\QLKS-main\\QLKS-main\\QLKS\\QLKS\\Model\\Phong.cs",
+              "RelativeToolTip": "QLKS\\Model\\Phong.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-12-20T10:10:39.373Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "QLKS",
+              "DocumentMoniker": "C:\\Users\\Admin\\Documents\\LTWins\\QLKS-main\\QLKS-main\\QLKS\\QLKS\\QLKS.csproj",
+              "RelativeDocumentMoniker": "QLKS\\QLKS.csproj",
+              "ToolTip": "C:\\Users\\Admin\\Documents\\LTWins\\QLKS-main\\QLKS-main\\QLKS\\QLKS\\QLKS.csproj",
+              "RelativeToolTip": "QLKS\\QLKS.csproj",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
+              "WhenOpened": "2024-12-20T10:09:22.525Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
               "Title": "DashboardPage.cs",
               "DocumentMoniker": "C:\\Users\\Admin\\Documents\\LTWins\\QLKS-main\\QLKS-main\\QLKS\\QLKS\\DashboardPage.cs",
               "RelativeDocumentMoniker": "QLKS\\DashboardPage.cs",
@@ -87,7 +138,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
+              "DocumentIndex": 12,
               "Title": "DashboardPage.cs [Design]",
               "DocumentMoniker": "C:\\Users\\Admin\\Documents\\LTWins\\QLKS-main\\QLKS-main\\QLKS\\QLKS\\DashboardPage.cs",
               "RelativeDocumentMoniker": "QLKS\\DashboardPage.cs",
@@ -99,7 +150,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 10,
               "Title": "ChucNangGUI.cs [Design]",
               "DocumentMoniker": "C:\\Users\\Admin\\Documents\\LTWins\\QLKS-main\\QLKS-main\\QLKS\\QLKS\\ChucNangGUI.cs",
               "RelativeDocumentMoniker": "QLKS\\ChucNangGUI.cs",
@@ -111,12 +162,12 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 9,
+              "DocumentIndex": 4,
               "Title": "NhanVien.cs",
-              "DocumentMoniker": "C:\\Users\\Admin\\Documents\\LTWins\\QLKS-main\\QLKS-main\\QLKS\\QLKS\\NhanVien.cs",
-              "RelativeDocumentMoniker": "QLKS\\NhanVien.cs",
-              "ToolTip": "C:\\Users\\Admin\\Documents\\LTWins\\QLKS-main\\QLKS-main\\QLKS\\QLKS\\NhanVien.cs",
-              "RelativeToolTip": "QLKS\\NhanVien.cs",
+              "DocumentMoniker": "C:\\Users\\Admin\\Documents\\LTWins\\QLKS-main\\QLKS-main\\QLKS\\QLKS\\Model\\NhanVien.cs",
+              "RelativeDocumentMoniker": "QLKS\\Model\\NhanVien.cs",
+              "ToolTip": "C:\\Users\\Admin\\Documents\\LTWins\\QLKS-main\\QLKS-main\\QLKS\\QLKS\\Model\\NhanVien.cs",
+              "RelativeToolTip": "QLKS\\Model\\NhanVien.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAA8AAAAZAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-12-19T19:18:29.915Z",
@@ -124,7 +175,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 9,
               "Title": "NhanVienPage.Designer.cs",
               "DocumentMoniker": "C:\\Users\\Admin\\Documents\\LTWins\\QLKS-main\\QLKS-main\\QLKS\\QLKS\\NhanVienPage.Designer.cs",
               "RelativeDocumentMoniker": "QLKS\\NhanVienPage.Designer.cs",
@@ -137,13 +188,13 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 8,
+              "DocumentIndex": 0,
               "Title": "NhanVienPage.cs",
               "DocumentMoniker": "C:\\Users\\Admin\\Documents\\LTWins\\QLKS-main\\QLKS-main\\QLKS\\QLKS\\NhanVienPage.cs",
               "RelativeDocumentMoniker": "QLKS\\NhanVienPage.cs",
               "ToolTip": "C:\\Users\\Admin\\Documents\\LTWins\\QLKS-main\\QLKS-main\\QLKS\\QLKS\\NhanVienPage.cs",
               "RelativeToolTip": "QLKS\\NhanVienPage.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABYAAACbAAAAAAAAAA==",
+              "ViewState": "AgIAAOQAAAAAAAAAAAAYwPYAAABBAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-12-19T17:27:47.081Z",
               "EditorCaption": ""
@@ -162,7 +213,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 6,
               "Title": "ChucNangGUI.cs",
               "DocumentMoniker": "C:\\Users\\Admin\\Documents\\LTWins\\QLKS-main\\QLKS-main\\QLKS\\QLKS\\ChucNangGUI.cs",
               "RelativeDocumentMoniker": "QLKS\\ChucNangGUI.cs",
@@ -175,19 +226,20 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 14,
+              "DocumentIndex": 17,
               "Title": "LoaiPhong.cs",
-              "DocumentMoniker": "C:\\Users\\Admin\\Documents\\LTWins\\QLKS-main\\QLKS-main\\QLKS\\QLKS\\LoaiPhong.cs",
-              "RelativeDocumentMoniker": "QLKS\\LoaiPhong.cs",
-              "ToolTip": "C:\\Users\\Admin\\Documents\\LTWins\\QLKS-main\\QLKS-main\\QLKS\\QLKS\\LoaiPhong.cs",
-              "RelativeToolTip": "QLKS\\LoaiPhong.cs",
+              "DocumentMoniker": "C:\\Users\\Admin\\Documents\\LTWins\\QLKS-main\\QLKS-main\\QLKS\\QLKS\\Model\\LoaiPhong.cs",
+              "RelativeDocumentMoniker": "QLKS\\Model\\LoaiPhong.cs",
+              "ToolTip": "C:\\Users\\Admin\\Documents\\LTWins\\QLKS-main\\QLKS-main\\QLKS\\QLKS\\Model\\LoaiPhong.cs",
+              "RelativeToolTip": "QLKS\\Model\\LoaiPhong.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAAhAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-19T12:20:56.592Z"
+              "WhenOpened": "2024-12-19T12:20:56.592Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 13,
+              "DocumentIndex": 16,
               "Title": "KhachHangPage.cs [Design]",
               "DocumentMoniker": "C:\\Users\\Admin\\Documents\\LTWins\\QLKS-main\\QLKS-main\\QLKS\\QLKS\\KhachHangPage.cs",
               "RelativeDocumentMoniker": "QLKS\\KhachHangPage.cs",
@@ -199,7 +251,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 11,
+              "DocumentIndex": 14,
               "Title": "PhongPage.cs",
               "DocumentMoniker": "C:\\Users\\Admin\\Documents\\LTWins\\QLKS-main\\QLKS-main\\QLKS\\QLKS\\PhongPage.cs",
               "RelativeDocumentMoniker": "QLKS\\PhongPage.cs",
@@ -212,7 +264,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 12,
+              "DocumentIndex": 15,
               "Title": "PhongPage.Designer.cs",
               "DocumentMoniker": "C:\\Users\\Admin\\Documents\\LTWins\\QLKS-main\\QLKS-main\\QLKS\\QLKS\\PhongPage.Designer.cs",
               "RelativeDocumentMoniker": "QLKS\\PhongPage.Designer.cs",
@@ -220,11 +272,12 @@
               "RelativeToolTip": "QLKS\\PhongPage.Designer.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAABYAAAAIAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-19T04:45:39.817Z"
+              "WhenOpened": "2024-12-19T04:45:39.817Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 7,
               "Title": "KhachHangPage.cs",
               "DocumentMoniker": "C:\\Users\\Admin\\Documents\\LTWins\\QLKS-main\\QLKS-main\\QLKS\\QLKS\\KhachHangPage.cs",
               "RelativeDocumentMoniker": "QLKS\\KhachHangPage.cs",
@@ -237,7 +290,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 8,
               "Title": "ChucNangGUI.Designer.cs",
               "DocumentMoniker": "C:\\Users\\Admin\\Documents\\LTWins\\QLKS-main\\QLKS-main\\QLKS\\QLKS\\ChucNangGUI.Designer.cs",
               "RelativeDocumentMoniker": "QLKS\\ChucNangGUI.Designer.cs",
@@ -245,19 +298,19 @@
               "RelativeToolTip": "QLKS\\ChucNangGUI.Designer.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAABYAAAAIAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-17T11:19:25.122Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-12-17T11:19:25.122Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 10,
+              "DocumentIndex": 13,
               "Title": "PhongPage.cs [Design]",
               "DocumentMoniker": "C:\\Users\\Admin\\Documents\\LTWins\\QLKS-main\\QLKS-main\\QLKS\\QLKS\\PhongPage.cs",
               "RelativeDocumentMoniker": "QLKS\\PhongPage.cs",
               "ToolTip": "C:\\Users\\Admin\\Documents\\LTWins\\QLKS-main\\QLKS-main\\QLKS\\QLKS\\PhongPage.cs [Design]",
               "RelativeToolTip": "QLKS\\PhongPage.cs [Design]",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-17T13:30:26.921Z"
+              "WhenOpened": "2024-12-17T13:30:26.921Z",
+              "EditorCaption": " [Design]"
             }
           ]
         }

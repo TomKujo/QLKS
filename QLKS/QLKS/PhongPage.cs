@@ -11,6 +11,7 @@ using System.Data.SqlClient;
 using System.ComponentModel.DataAnnotations;
 using System.Drawing.Text;
 using System.Collections;
+using QLKS.Model;
 
 namespace QLKS
 {

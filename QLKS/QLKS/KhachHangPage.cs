@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using System.Data.SqlClient;
 using System.Drawing.Text;
 using System.ComponentModel.DataAnnotations;
+using QLKS.Model;
 
 namespace QLKS
 {

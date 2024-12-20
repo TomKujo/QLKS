@@ -13,9 +13,6 @@ C:\Users\Admin\Documents\LTWins\QLKS-main\QLKS-main\QLKS\QLKS\bin\Debug\net6.0-w
 C:\Users\Admin\Documents\LTWins\QLKS-main\QLKS-main\QLKS\QLKS\obj\Debug\net6.0-windows7.0\QLKS.csproj.AssemblyReference.cache
 C:\Users\Admin\Documents\LTWins\QLKS-main\QLKS-main\QLKS\QLKS\obj\Debug\net6.0-windows7.0\QLKS.frmChucNang.resources
 C:\Users\Admin\Documents\LTWins\QLKS-main\QLKS-main\QLKS\QLKS\obj\Debug\net6.0-windows7.0\QLKS.frmDangNhap.resources
-C:\Users\Admin\Documents\LTWins\QLKS-main\QLKS-main\QLKS\QLKS\obj\Debug\net6.0-windows7.0\QLKS.frmKH.resources
-C:\Users\Admin\Documents\LTWins\QLKS-main\QLKS-main\QLKS\QLKS\obj\Debug\net6.0-windows7.0\QLKS.frmNV.resources
-C:\Users\Admin\Documents\LTWins\QLKS-main\QLKS-main\QLKS\QLKS\obj\Debug\net6.0-windows7.0\QLKS.frmPhong.resources
 C:\Users\Admin\Documents\LTWins\QLKS-main\QLKS-main\QLKS\QLKS\obj\Debug\net6.0-windows7.0\QLKS.Properties.Resources.resources
 C:\Users\Admin\Documents\LTWins\QLKS-main\QLKS-main\QLKS\QLKS\obj\Debug\net6.0-windows7.0\QLKS.csproj.GenerateResource.cache
 C:\Users\Admin\Documents\LTWins\QLKS-main\QLKS-main\QLKS\QLKS\obj\Debug\net6.0-windows7.0\QLKS.GeneratedMSBuildEditorConfig.editorconfig

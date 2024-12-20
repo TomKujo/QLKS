@@ -10,20 +10,11 @@
     <Compile Update="DashboardPage.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Update="KhachHangGUI.cs">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Update="KhachHangPage.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Update="NhanVienGUI.cs">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Update="NhanVienPage.cs">
       <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Update="PhongGUI.cs">
-      <SubType>Form</SubType>
     </Compile>
     <Compile Update="PhongPage.cs">
       <SubType>UserControl</SubType>

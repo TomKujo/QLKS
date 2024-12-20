@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using System.Data.SqlClient;
 using System.ComponentModel.DataAnnotations;
 using Microsoft.IdentityModel.Tokens;
+using QLKS.Model;
 
 namespace QLKS
 {
@@ -170,7 +171,7 @@ namespace QLKS
             }
             else
             {
-                if (checkExistNhanVien(tenNV.Text))
+                if (checkExistNhanVien(Email.Text,SDT.Text))
                 {
                     MessageBox.Show("Nhân viên đã tồn tại");
                     return;
@@ -196,7 +197,7 @@ namespace QLKS
                     taoTaiKhoanNV(maNV);
                     loadNhanVien();
                     string message = @"Thêm nhân viên thành công
-Tên tài khoản: " + tenNV.Text + @" 
+Tên tài khoản: " + Email.Text + @" 
 Mật khẩu: " + "123456";
                     MessageBox.Show(message);
                 }
@@ -223,7 +224,7 @@ Mật khẩu: " + "123456";
             VALUES(@maNV, @tenTK, @matKhau)";
             SqlCommand cmd = new SqlCommand(query, _conn);
             cmd.Parameters.AddWithValue("@maNV", maNV);
-            cmd.Parameters.AddWithValue("@tenTK", tenNV.Text);
+            cmd.Parameters.AddWithValue("@tenTK", Email.Text);
             cmd.Parameters.AddWithValue("@matKhau", "123456");
             _conn.Open();
             cmd.ExecuteNonQuery();
@@ -243,11 +244,12 @@ Mật khẩu: " + "123456";
             return luongCoBan;
         }
 
-        private bool checkExistNhanVien(string tenNV)
+        private bool checkExistNhanVien(string email, string sdt)
         {
-            string query = "SELECT * FROM NhanVien WHERE TenNV = @tenNV";
+            string query = "SELECT * FROM NhanVien WHERE Email = @email OR SDT = @sdt";
             SqlCommand cmd = new SqlCommand(query, _conn);
-            cmd.Parameters.AddWithValue("@tenNV", tenNV);
+            cmd.Parameters.AddWithValue("@email", email);
+            cmd.Parameters.AddWithValue("@sdt", sdt);
             _conn.Open();
             SqlDataReader dr = cmd.ExecuteReader();
             bool exist = dr.HasRows;

@@ -1,5 +1,6 @@
 ﻿using System.Data;
 using System.Data.SqlClient;
+using QLKS.Model;
 
 namespace QLKS
 {
