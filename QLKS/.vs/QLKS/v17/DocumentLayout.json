@@ -3,12 +3,12 @@
   "WorkspaceRootPath": "C:\\Users\\Admin\\Documents\\LTWins\\QLKS-main\\QLKS-main\\QLKS\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{7F813703-0FFA-49FD-B359-9B0DFD24E1C5}|QLKS\\QLKS.csproj|c:\\users\\admin\\documents\\ltwins\\qlks-main\\qlks-main\\qlks\\qlks\\database\\databaseconnection.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{7F813703-0FFA-49FD-B359-9B0DFD24E1C5}|QLKS\\QLKS.csproj|solutionrelative:qlks\\database\\databaseconnection.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{7F813703-0FFA-49FD-B359-9B0DFD24E1C5}|QLKS\\QLKS.csproj|c:\\users\\admin\\documents\\ltwins\\qlks-main\\qlks-main\\qlks\\qlks\\dashboardpage.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{7F813703-0FFA-49FD-B359-9B0DFD24E1C5}|QLKS\\QLKS.csproj|solutionrelative:qlks\\dashboardpage.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7F813703-0FFA-49FD-B359-9B0DFD24E1C5}|QLKS\\QLKS.csproj|c:\\users\\admin\\documents\\ltwins\\qlks-main\\qlks-main\\qlks\\qlks\\database\\databaseconnection.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7F813703-0FFA-49FD-B359-9B0DFD24E1C5}|QLKS\\QLKS.csproj|solutionrelative:qlks\\database\\databaseconnection.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{7F813703-0FFA-49FD-B359-9B0DFD24E1C5}|QLKS\\QLKS.csproj|c:\\users\\admin\\documents\\ltwins\\qlks-main\\qlks-main\\qlks\\qlks\\khachhangpage.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -30,30 +30,30 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 0,
+          "SelectedChildIndex": 1,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 1,
               "Title": "DatabaseConnection.cs",
               "DocumentMoniker": "C:\\Users\\Admin\\Documents\\LTWins\\QLKS-main\\QLKS-main\\QLKS\\QLKS\\Database\\DatabaseConnection.cs",
               "RelativeDocumentMoniker": "QLKS\\Database\\DatabaseConnection.cs",
               "ToolTip": "C:\\Users\\Admin\\Documents\\LTWins\\QLKS-main\\QLKS-main\\QLKS\\QLKS\\Database\\DatabaseConnection.cs",
               "RelativeToolTip": "QLKS\\Database\\DatabaseConnection.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAABAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-01-06T17:19:19.833Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 0,
               "Title": "DashboardPage.cs",
               "DocumentMoniker": "C:\\Users\\Admin\\Documents\\LTWins\\QLKS-main\\QLKS-main\\QLKS\\QLKS\\DashboardPage.cs",
               "RelativeDocumentMoniker": "QLKS\\DashboardPage.cs",
               "ToolTip": "C:\\Users\\Admin\\Documents\\LTWins\\QLKS-main\\QLKS-main\\QLKS\\QLKS\\DashboardPage.cs",
               "RelativeToolTip": "QLKS\\DashboardPage.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAADkAAAApAAAAAAAAAA==",
+              "ViewState": "AgIAAC0AAAAAAAAAAAAlwDgAAABeAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-12-19T19:58:33.336Z",
               "EditorCaption": ""
@@ -68,8 +68,7 @@
               "RelativeToolTip": "QLKS\\KhachHangPage.cs",
               "ViewState": "AgIAAAkAAAAAAAAAAAAvwBYAAAAiAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-18T05:38:59.79Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-12-18T05:38:59.79Z"
             },
             {
               "$type": "Document",
@@ -81,8 +80,7 @@
               "RelativeToolTip": "QLKS\\NhanVienPage.cs",
               "ViewState": "AgIAAAMCAAAAAAAAAAAmwBgCAAAxAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-19T17:27:47.081Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-12-19T17:27:47.081Z"
             },
             {
               "$type": "Document",
@@ -94,8 +92,7 @@
               "RelativeToolTip": "QLKS\\PhongPage.cs",
               "ViewState": "AgIAAL8CAAAAAAAAAAAmwNQCAAAtAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-19T08:15:38.961Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-12-19T08:15:38.961Z"
             }
           ]
         }

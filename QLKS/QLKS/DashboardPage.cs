@@ -54,7 +54,7 @@ namespace QLKS
             DatabaseConnection.Connection.Open();
             string query = "SELECT SUM(TongTien) FROM DatPhong";
             SqlCommand cmd = new SqlCommand(query, DatabaseConnection.Connection);
-            int doanhThu = Convert.ToInt32(cmd.ExecuteScalar());
+            int doanhThu = cmd.ExecuteScalar() == DBNull.Value ? 0 : (int)cmd.ExecuteScalar();
             DatabaseConnection.Connection.Close();
             soDoanhThu.Text = doanhThu.ToString();
         }

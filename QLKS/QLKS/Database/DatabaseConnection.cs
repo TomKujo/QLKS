@@ -10,7 +10,7 @@ namespace QLKS.Database
 {
     public static class DatabaseConnection
     {
-        public static readonly string connectionString = "Data Source=DESKTOP-HDPCSE2\\SQLEXPRESS;Initial Catalog=QLKS;Integrated Security=True;TrustServerCertificate=True";
+        public static readonly string connectionString = "Data Source=DESKTOP-HDPCSE2\\SQLEXPRESS;Initial Catalog=QLKS1;Integrated Security=True;TrustServerCertificate=True";
         private static SqlConnection _conn;
 
         public static SqlConnection Connection
