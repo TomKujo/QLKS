@@ -1,17 +1,15 @@
 ﻿using System.Data;
 using System.Data.SqlClient;
+using QLKS.Database;
 using QLKS.Model;
 
 namespace QLKS
 {
     public partial class frmDangNhap : Form
     {
-        private SqlConnection _conn;
-
         public frmDangNhap()
         {
             InitializeComponent();
-            _conn = new SqlConnection("Data Source=DESKTOP-HDPCSE2\\SQLEXPRESS;Initial Catalog=QLKS;Integrated Security=True;TrustServerCertificate=True");
         }
 
         private void btnDangNhap_Click(object sender, EventArgs e)
@@ -69,15 +67,15 @@ namespace QLKS
         {
             try
             {
-                if (_conn.State == ConnectionState.Closed)
+                if (DatabaseConnection.Connection.State == ConnectionState.Closed)
                 {
-                    _conn.Open();
+                    DatabaseConnection.Connection.Open();
                 }
                 string query = @"SELECT nv.MaNV, nv.TenNV, nv.SDT
                                 from TaiKhoan tk
                                 JOIN NhanVien nv ON tk.MaNV = nv.MaNV
                                 WHERE tk.TenTK = @name AND tk.MatKhau = @password";
-                SqlCommand sqlCommand = new SqlCommand(query, _conn);
+                SqlCommand sqlCommand = new SqlCommand(query, DatabaseConnection.Connection);
                 sqlCommand.Parameters.AddWithValue("@name", name);
                 sqlCommand.Parameters.AddWithValue("@password", password);
 
@@ -91,20 +89,20 @@ namespace QLKS
                         SDT = reader["SDT"].ToString()
                     };
                     reader.Close();
-                    _conn.Close();
+                    DatabaseConnection.Connection.Close();
                     return nhanVien;
                 }
                 else
                 {
                     reader.Close();
-                    _conn.Close();
+                    DatabaseConnection.Connection.Close();
                     return null;
                 }
             }
             catch (Exception ex)
             {
                 MessageBox.Show("Error: " + ex.Message);
-                _conn.Close();
+                DatabaseConnection.Connection.Close();
                 return null;
             }
         }

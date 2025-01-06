@@ -11,17 +11,16 @@ using System.Data.SqlClient;
 using System.ComponentModel.DataAnnotations;
 using Microsoft.IdentityModel.Tokens;
 using QLKS.Model;
+using QLKS.Database;
 
 namespace QLKS
 {
     public partial class NhanVienPage : UserControl
     {
-        private SqlConnection _conn;
         private DataTable _nhanVienTable;
         public NhanVienPage()
         {
             InitializeComponent();
-            _conn = new SqlConnection("Data Source=DESKTOP-HDPCSE2\\SQLEXPRESS;Initial Catalog=QLKS;Integrated Security=True;TrustServerCertificate=True");
             loadViTri();
             loadNhanVien();
             loadLoaiViTri();
@@ -30,8 +29,8 @@ namespace QLKS
         private void loadViTri()
         {
             string query = "SELECT TenVT FROM ViTri";
-            SqlCommand cmd = new SqlCommand(query, _conn);
-            _conn.Open();
+            SqlCommand cmd = new SqlCommand(query, DatabaseConnection.Connection);
+            DatabaseConnection.Connection.Open();
             SqlDataReader dr = cmd.ExecuteReader();
             viTriCB.Items.Clear();
             capNhatViTriCB.Items.Clear();
@@ -45,19 +44,19 @@ namespace QLKS
                 capNhatViTriCB1.Items.Add(dr["TenVT"].ToString());
                 timViTriCB.Items.Add(dr["TenVT"].ToString());
             }
-            _conn.Close();
+            DatabaseConnection.Connection.Close();
         }
 
         private void loadLoaiViTri()
         {
             string query = "SELECT * FROM ViTri";
-            SqlCommand cmd = new SqlCommand(query, _conn);
-            _conn.Open();
+            SqlCommand cmd = new SqlCommand(query, DatabaseConnection.Connection);
+            DatabaseConnection.Connection.Open();
             SqlDataReader dr = cmd.ExecuteReader();
             DataTable dataTable = new DataTable();
             dataTable.Load(dr);
             loaiPhongView.DataSource = dataTable;
-            _conn.Close();
+            DatabaseConnection.Connection.Close();
         }
 
         private void loadNhanVien()
@@ -77,8 +76,8 @@ namespace QLKS
 
             try
             {
-                SqlCommand cmd = new SqlCommand(query, _conn);
-                _conn.Open();
+                SqlCommand cmd = new SqlCommand(query, DatabaseConnection.Connection);
+                DatabaseConnection.Connection.Open();
                 SqlDataReader dr = cmd.ExecuteReader();
                 _nhanVienTable = new DataTable();
                 _nhanVienTable.Load(dr);
@@ -102,7 +101,7 @@ namespace QLKS
             }
             finally
             {
-                _conn.Close();
+                DatabaseConnection.Connection.Close();
             }
         }
 
@@ -181,7 +180,7 @@ namespace QLKS
                     string query = @"
                     INSERT INTO NhanVien(TenNV, SDT, Email, Luong, NgayVaoLam, MaVT)
                     VALUES(@tenNV, @SDT, @Email, @Luong, @NgayVaoLam, @MaVT)";
-                    SqlCommand cmd = new SqlCommand(query, _conn);
+                    SqlCommand cmd = new SqlCommand(query, DatabaseConnection.Connection);
                     int maVT = Convert.ToInt32(getMaViTri(viTriCB.SelectedItem.ToString()));
                     string luong = getLuongCoBan(maVT);
                     cmd.Parameters.AddWithValue("@tenNV", tenNV.Text);
@@ -190,9 +189,9 @@ namespace QLKS
                     cmd.Parameters.AddWithValue("@Luong", luong);
                     cmd.Parameters.AddWithValue("@NgayVaoLam", DateTime.Now);
                     cmd.Parameters.AddWithValue("@MaVT", maVT);
-                    _conn.Open();
+                    DatabaseConnection.Connection.Open();
                     cmd.ExecuteNonQuery();
-                    _conn.Close();
+                    DatabaseConnection.Connection.Close();
                     string maNV = getMaNV(tenNV.Text);
                     taoTaiKhoanNV(maNV);
                     loadNhanVien();
@@ -207,13 +206,13 @@ Mật khẩu: " + "123456";
         private string getMaNV(string tenNV)
         {
             string query = "SELECT MaNV FROM NhanVien WHERE TenNV = @tenNV";
-            SqlCommand cmd = new SqlCommand(query, _conn);
+            SqlCommand cmd = new SqlCommand(query, DatabaseConnection.Connection);
             cmd.Parameters.AddWithValue("@tenNV", tenNV);
-            _conn.Open();
+            DatabaseConnection.Connection.Open();
             SqlDataReader dr = cmd.ExecuteReader();
             dr.Read();
             string maNV = dr["MaNV"].ToString();
-            _conn.Close();
+            DatabaseConnection.Connection.Close();
             return maNV;
         }
 
@@ -222,38 +221,38 @@ Mật khẩu: " + "123456";
             string query = @"
             INSERT INTO TaiKhoan(MaNV, TenTK, MatKhau)
             VALUES(@maNV, @tenTK, @matKhau)";
-            SqlCommand cmd = new SqlCommand(query, _conn);
+            SqlCommand cmd = new SqlCommand(query, DatabaseConnection.Connection);
             cmd.Parameters.AddWithValue("@maNV", maNV);
             cmd.Parameters.AddWithValue("@tenTK", Email.Text);
             cmd.Parameters.AddWithValue("@matKhau", "123456");
-            _conn.Open();
+            DatabaseConnection.Connection.Open();
             cmd.ExecuteNonQuery();
-            _conn.Close();
+            DatabaseConnection.Connection.Close();
         }
 
         private string getLuongCoBan(int maVT)
         {
             string query = "SELECT LuongCoBan FROM ViTri WHERE MaVT = @maVT";
-            SqlCommand cmd = new SqlCommand(query, _conn);
+            SqlCommand cmd = new SqlCommand(query, DatabaseConnection.Connection);
             cmd.Parameters.AddWithValue("@maVT", viTriCB.SelectedIndex);
-            _conn.Open();
+            DatabaseConnection.Connection.Open();
             SqlDataReader dr = cmd.ExecuteReader();
             dr.Read();
             string luongCoBan = dr["LuongCoBan"].ToString();
-            _conn.Close();
+            DatabaseConnection.Connection.Close();
             return luongCoBan;
         }
 
         private bool checkExistNhanVien(string email, string sdt)
         {
             string query = "SELECT * FROM NhanVien WHERE Email = @email OR SDT = @sdt";
-            SqlCommand cmd = new SqlCommand(query, _conn);
+            SqlCommand cmd = new SqlCommand(query, DatabaseConnection.Connection);
             cmd.Parameters.AddWithValue("@email", email);
             cmd.Parameters.AddWithValue("@sdt", sdt);
-            _conn.Open();
+            DatabaseConnection.Connection.Open();
             SqlDataReader dr = cmd.ExecuteReader();
             bool exist = dr.HasRows;
-            _conn.Close();
+            DatabaseConnection.Connection.Close();
             return exist;
         }
 
@@ -270,12 +269,12 @@ Mật khẩu: " + "123456";
         private bool checkExistLoaiViTri(string tenVT)
         {
             string query = "SELECT * FROM ViTri WHERE TenVT = @tenVT";
-            SqlCommand cmd = new SqlCommand(query, _conn);
+            SqlCommand cmd = new SqlCommand(query, DatabaseConnection.Connection);
             cmd.Parameters.AddWithValue("@tenVT", tenVT);
-            _conn.Open();
+            DatabaseConnection.Connection.Open();
             SqlDataReader dr = cmd.ExecuteReader();
             bool exist = dr.HasRows;
-            _conn.Close();
+            DatabaseConnection.Connection.Close();
             return exist;
         }
 
@@ -296,14 +295,14 @@ Mật khẩu: " + "123456";
                 string query = @"
                 INSERT INTO ViTri(TenVT, LuongCoBan, MoTaVT)
                 VALUES(@tenVT, @luongCoBan, @moTaVT)";
-                SqlCommand cmd = new SqlCommand(query, _conn);
+                SqlCommand cmd = new SqlCommand(query, DatabaseConnection.Connection);
                 cmd.Parameters.AddWithValue("@tenVT", themTenVTTB.Text);
                 cmd.Parameters.AddWithValue("@luongCoBan", themLCBTB.Text);
                 string moTa = string.IsNullOrEmpty(themMoTaVTTB.Text) ? "Không có" : themMoTaVTTB.Text;
                 cmd.Parameters.AddWithValue("@moTaVT", moTa);
-                _conn.Open();
+                DatabaseConnection.Connection.Open();
                 cmd.ExecuteNonQuery();
-                _conn.Close();
+                DatabaseConnection.Connection.Close();
                 loadLoaiViTri();
                 MessageBox.Show("Thêm loại vị trí thành công");
             }
@@ -346,12 +345,12 @@ Mật khẩu: " + "123456";
         private bool checkExitsNhanVienByMaNV(string maNV)
         {
             string query = "SELECT * FROM NhanVien WHERE MaNV = @maNV";
-            SqlCommand cmd = new SqlCommand(query, _conn);
+            SqlCommand cmd = new SqlCommand(query, DatabaseConnection.Connection);
             cmd.Parameters.AddWithValue("@maNV", maNV);
-            _conn.Open();
+            DatabaseConnection.Connection.Open();
             SqlDataReader dr = cmd.ExecuteReader();
             bool exist = dr.HasRows;
-            _conn.Close();
+            DatabaseConnection.Connection.Close();
             return exist;
         }
 
@@ -390,9 +389,9 @@ Mật khẩu: " + "123456";
                     else
                     {
                         string query = "SELECT * FROM NhanVien WHERE MaNV = @maNV";
-                        SqlCommand cmd = new SqlCommand(query, _conn);
+                        SqlCommand cmd = new SqlCommand(query, DatabaseConnection.Connection);
                         cmd.Parameters.AddWithValue("@maNV", maNV.Text);
-                        _conn.Open();
+                        DatabaseConnection.Connection.Open();
                         SqlDataReader dr = cmd.ExecuteReader();
                         dr.Read();
                         NhanVien nhanVien = new NhanVien
@@ -404,21 +403,21 @@ Mật khẩu: " + "123456";
                             MaVT = Convert.ToInt32(dr["MaVT"].ToString()),
                             Luong = Convert.ToInt32(dr["Luong"].ToString())
                         };
-                        _conn.Close();
+                        DatabaseConnection.Connection.Close();
 
                         query = @"
                         UPDATE NhanVien
                         SET TenNV = @tenNV, SDT = @SDT, Email = @Email, MaVT = @MaVT
                         WHERE MaNV = @maNV";
-                        cmd = new SqlCommand(query, _conn);
+                        cmd = new SqlCommand(query, DatabaseConnection.Connection);
                         cmd.Parameters.AddWithValue("@tenNV", capNhatTenKH.Text != "" ? capNhatTenKH.Text : nhanVien.TenNV);
                         cmd.Parameters.AddWithValue("@SDT", capNhatSDT.Text != "" ? capNhatSDT.Text : nhanVien.SDT);
                         cmd.Parameters.AddWithValue("@Email", capNhatEmail.Text != "" ? capNhatEmail.Text : nhanVien.Email);
                         cmd.Parameters.AddWithValue("@MaVT", getMaViTri(capNhatViTriCB.SelectedItem.ToString()));
                         cmd.Parameters.AddWithValue("@maNV", maNV.Text);
-                        _conn.Open();
+                        DatabaseConnection.Connection.Open();
                         cmd.ExecuteNonQuery();
-                        _conn.Close();
+                        DatabaseConnection.Connection.Close();
                         loadNhanVien();
                         MessageBox.Show("Cập nhật nhân viên thành công");
                     }
@@ -441,11 +440,11 @@ Mật khẩu: " + "123456";
                     else
                     {
                         string query = "DELETE FROM NhanVien WHERE MaNV = @maNV";
-                        SqlCommand cmd = new SqlCommand(query, _conn);
+                        SqlCommand cmd = new SqlCommand(query, DatabaseConnection.Connection);
                         cmd.Parameters.AddWithValue("@maNV", maNV.Text);
-                        _conn.Open();
+                        DatabaseConnection.Connection.Open();
                         cmd.ExecuteNonQuery();
-                        _conn.Close();
+                        DatabaseConnection.Connection.Close();
                         loadNhanVien();
                         MessageBox.Show("Xóa nhân viên thành công");
                     }
@@ -456,14 +455,14 @@ Mật khẩu: " + "123456";
         private string getMaViTri(string tenVT)
         {
             string query = "SELECT MaVT FROM ViTri WHERE TenVT = @tenVT";
-            SqlCommand cmd = new SqlCommand(query, _conn);
+            SqlCommand cmd = new SqlCommand(query, DatabaseConnection.Connection);
             cmd.Parameters.AddWithValue("@tenVT", tenVT);
-            _conn.Open();
+            DatabaseConnection.Connection.Open();
             SqlDataReader dr = cmd.ExecuteReader();
             string maVT;
             dr.Read();
             maVT = dr["MaVT"].ToString();
-            _conn.Close();
+            DatabaseConnection.Connection.Close();
             return maVT;
         }
 
@@ -515,14 +514,14 @@ Mật khẩu: " + "123456";
                         UPDATE ViTri
                         SET LuongCoBan = @luongCoBan, MoTaVT = @moTaVT
                         WHERE MaVT = @maVT";
-                        SqlCommand cmd = new SqlCommand(query, _conn);
+                        SqlCommand cmd = new SqlCommand(query, DatabaseConnection.Connection);
                         cmd.Parameters.AddWithValue("@luongCoBan", capNhatLCBTB.Text);
                         string moTa = string.IsNullOrEmpty(capNhatMoTaTB.Text) ? "Không có" : capNhatMoTaTB.Text;
                         cmd.Parameters.AddWithValue("@moTaVT", moTa);
                         cmd.Parameters.AddWithValue("@maVT", getMaViTri(capNhatViTriCB1.SelectedItem.ToString()));
-                        _conn.Open();
+                        DatabaseConnection.Connection.Open();
                         cmd.ExecuteNonQuery();
-                        _conn.Close();
+                        DatabaseConnection.Connection.Close();
                         loadLoaiViTri();
                         loadViTri();
                         MessageBox.Show("Cập nhật loại vị trí thành công");
@@ -531,11 +530,11 @@ Mật khẩu: " + "123456";
                 else if (radioButton3.Checked)
                 {
                     string query = "DELETE FROM ViTri WHERE MaVT = @maVT";
-                    SqlCommand cmd = new SqlCommand(query, _conn);
+                    SqlCommand cmd = new SqlCommand(query, DatabaseConnection.Connection);
                     cmd.Parameters.AddWithValue("@maVT", getMaViTri(capNhatViTriCB1.SelectedItem.ToString()));
-                    _conn.Open();
+                    DatabaseConnection.Connection.Open();
                     cmd.ExecuteNonQuery();
-                    _conn.Close();
+                    DatabaseConnection.Connection.Close();
                     loadLoaiViTri();
                     loadViTri();
                     MessageBox.Show("Xóa loại vị trí thành công");

@@ -12,17 +12,16 @@ using System.ComponentModel.DataAnnotations;
 using System.Drawing.Text;
 using System.Collections;
 using QLKS.Model;
+using QLKS.Database;
 
 namespace QLKS
 {
     public partial class PhongPage : UserControl
     {
-        private SqlConnection _conn;
         private DataTable phongTable;
         public PhongPage()
         {
             InitializeComponent();
-            _conn = new SqlConnection("Data Source=DESKTOP-HDPCSE2\\SQLEXPRESS;Initial Catalog=QLKS;Integrated Security=True;TrustServerCertificate=True");
             timKiemLPCB.Items.Add("Tất cả");
             timKiemTinhTrangCB.Items.Add("Tất cả");
             timKiemTinhTrangCB.SelectedIndex = 0;
@@ -73,8 +72,8 @@ namespace QLKS
         {
             loaiPhongCB.Items.Clear();
             string query = "SELECT * FROM LoaiPhong";
-            SqlCommand cmd = new SqlCommand(query, _conn);
-            _conn.Open();
+            SqlCommand cmd = new SqlCommand(query, DatabaseConnection.Connection);
+            DatabaseConnection.Connection.Open();
             SqlDataReader dr = cmd.ExecuteReader();
             while (dr.Read())
             {
@@ -82,21 +81,21 @@ namespace QLKS
                 timKiemLPCB.Items.Add(dr["TenLP"].ToString());
                 themPhongLPCB.Items.Add(dr["TenLP"].ToString());
             }
-            _conn.Close();
+            DatabaseConnection.Connection.Close();
         }
 
         private void CapNhatTinhTrang()
         {
             string query = "SELECT TinhTrang FROM Phong";
-            SqlCommand cmd = new SqlCommand(query, _conn);
-            _conn.Open();
+            SqlCommand cmd = new SqlCommand(query, DatabaseConnection.Connection);
+            DatabaseConnection.Connection.Open();
             SqlDataReader dr = cmd.ExecuteReader();
             while (dr.Read())
             {
                 if (!timKiemTinhTrangCB.Items.Contains(dr["TinhTrang"].ToString()))
                     timKiemTinhTrangCB.Items.Add(dr["TinhTrang"].ToString());
             }
-            _conn.Close();
+            DatabaseConnection.Connection.Close();
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -146,21 +145,21 @@ namespace QLKS
             if (maKHexit != string.Empty)
             {
                 string queryDatPhong = "INSERT INTO DatPhong(MaKH, MaPhong, TongTien, TinhTrang) VALUES(@maKH, @maPhong, @TongTien, @tinhTrang)";
-                SqlCommand cmd = new SqlCommand(queryDatPhong, _conn);
-                _conn.Open();
+                SqlCommand cmd = new SqlCommand(queryDatPhong, DatabaseConnection.Connection);
+                DatabaseConnection.Connection.Open();
                 cmd.Parameters.AddWithValue("@maKH", maKHexit);
                 cmd.Parameters.AddWithValue("@maPhong", maPhong);
                 cmd.Parameters.AddWithValue("@TongTien", tongTien);
                 cmd.Parameters.AddWithValue("@tinhTrang", "chưa trả");
                 cmd.ExecuteNonQuery();
-                _conn.Close();
+                DatabaseConnection.Connection.Close();
                 string queryUpdatePhong = "UPDATE Phong SET TinhTrang = @tinhTrang WHERE MaPhong = @maPhong";
-                SqlCommand cmdUpdatePhong = new SqlCommand(queryUpdatePhong, _conn);
-                _conn.Open();
+                SqlCommand cmdUpdatePhong = new SqlCommand(queryUpdatePhong, DatabaseConnection.Connection);
+                DatabaseConnection.Connection.Open();
                 cmdUpdatePhong.Parameters.AddWithValue("@tinhTrang", "không trống");
                 cmdUpdatePhong.Parameters.AddWithValue("@maPhong", maPhong);
                 cmdUpdatePhong.ExecuteNonQuery();
-                _conn.Close();
+                DatabaseConnection.Connection.Close();
                 MessageBox.Show("Đặt phòng thành công");
                 ShowPhong();
                 return;
@@ -182,7 +181,7 @@ Nếu khách hàng đã tồn tại hãy kiểm tra Email và SĐT";
             {
                 string query;
                 SqlCommand cmd = new SqlCommand();
-                cmd.Connection = _conn;
+                cmd.Connection = DatabaseConnection.Connection;
 
                 if (radioButton5.Checked && loaiPhongCB.SelectedIndex != -1)
                 {
@@ -208,7 +207,7 @@ Nếu khách hàng đã tồn tại hãy kiểm tra Email và SĐT";
                     throw new Exception("Vui lòng chọn loại phòng hoặc nhập mã phòng");
                 }
 
-                _conn.Open();
+                DatabaseConnection.Connection.Open();
                 object result = cmd.ExecuteScalar();
                 if (result != null)
                 {
@@ -226,19 +225,19 @@ Nếu khách hàng đã tồn tại hãy kiểm tra Email và SĐT";
             }
             finally
             {
-                _conn.Close();
+                DatabaseConnection.Connection.Close();
             }
         }
 
         private string KhachHangExists(string sdt, string email)
         {
             string queryMaKH = "SELECT MaKH FROM KhachHang WHERE SDT = @sdt AND Email = @email";
-            SqlCommand cmd = new SqlCommand(queryMaKH, _conn);
-            _conn.Open();
+            SqlCommand cmd = new SqlCommand(queryMaKH, DatabaseConnection.Connection);
+            DatabaseConnection.Connection.Open();
             cmd.Parameters.AddWithValue("@sdt", SDT.Text);
             cmd.Parameters.AddWithValue("@email", Email.Text);
             int maKH = Convert.ToInt32(cmd.ExecuteScalar());
-            _conn.Close();
+            DatabaseConnection.Connection.Close();
             return maKH != 0 ? maKH.ToString() : string.Empty;
         }
 
@@ -247,9 +246,9 @@ Nếu khách hàng đã tồn tại hãy kiểm tra Email và SĐT";
             try
             {
                 string query = "SELECT TinhTrang FROM Phong WHERE MaPhong = @maPhong";
-                SqlCommand cmd = new SqlCommand(query, _conn);
+                SqlCommand cmd = new SqlCommand(query, DatabaseConnection.Connection);
                 cmd.Parameters.AddWithValue("@maPhong", maPhong);
-                _conn.Open();
+                DatabaseConnection.Connection.Open();
                 SqlDataReader reader = cmd.ExecuteReader();
 
                 if (reader.Read())
@@ -275,7 +274,7 @@ Nếu khách hàng đã tồn tại hãy kiểm tra Email và SĐT";
             }
             finally
             {
-                _conn.Close();
+                DatabaseConnection.Connection.Close();
             }
         }
 
@@ -289,11 +288,11 @@ Nếu khách hàng đã tồn tại hãy kiểm tra Email và SĐT";
                 JOIN LoaiPhong lp ON p.MaLP = lp.MaLP
                 WHERE lp.TenLP = @tenLP AND p.TinhTrang != @tinhTrang";
 
-                SqlCommand cmd = new SqlCommand(query, _conn);
+                SqlCommand cmd = new SqlCommand(query, DatabaseConnection.Connection);
                 string tinhTrang = "không trống";
                 cmd.Parameters.AddWithValue("@tenLP", loaiPhongCB.SelectedItem.ToString());
                 cmd.Parameters.AddWithValue("@tinhTrang", tinhTrang);
-                _conn.Open();
+                DatabaseConnection.Connection.Open();
                 int availableRooms = (int)cmd.ExecuteScalar();
 
                 if (availableRooms == 0)
@@ -310,7 +309,7 @@ Nếu khách hàng đã tồn tại hãy kiểm tra Email và SĐT";
             }
             finally
             {
-                _conn.Close();
+                DatabaseConnection.Connection.Close();
             }
         }
 
@@ -321,13 +320,13 @@ Nếu khách hàng đã tồn tại hãy kiểm tra Email và SĐT";
                 FROM Phong p
                 JOIN LoaiPhong lp ON p.MaLP = lp.MaLP
                 WHERE lp.TenLP = @tenLP AND p.TinhTrang = @tinhTrang";
-            SqlCommand cmd = new SqlCommand(query, _conn);
+            SqlCommand cmd = new SqlCommand(query, DatabaseConnection.Connection);
             string tinhTrang = "trống";
             cmd.Parameters.AddWithValue("@tenLP", tenLP);
             cmd.Parameters.AddWithValue("@tinhTrang", tinhTrang);
-            _conn.Open();
+            DatabaseConnection.Connection.Open();
             int result = Convert.ToInt32(cmd.ExecuteScalar());
-            _conn.Close();
+            DatabaseConnection.Connection.Close();
             return result != null ? result.ToString() : string.Empty;
         }
 
@@ -353,8 +352,8 @@ Nếu khách hàng đã tồn tại hãy kiểm tra Email và SĐT";
 
             try
             {
-                SqlCommand cmd = new SqlCommand(query, _conn);
-                _conn.Open();
+                SqlCommand cmd = new SqlCommand(query, DatabaseConnection.Connection);
+                DatabaseConnection.Connection.Open();
                 SqlDataReader dr = cmd.ExecuteReader();
                 phongTable = new DataTable();
                 phongTable.Load(dr);
@@ -376,7 +375,7 @@ Nếu khách hàng đã tồn tại hãy kiểm tra Email và SĐT";
             }
             finally
             {
-                _conn.Close();
+                DatabaseConnection.Connection.Close();
             }
         }
 
@@ -385,8 +384,8 @@ Nếu khách hàng đã tồn tại hãy kiểm tra Email và SĐT";
             string query = "SELECT * FROM LoaiPhong";
             try
             {
-                SqlCommand cmd = new SqlCommand(query, _conn);
-                _conn.Open();
+                SqlCommand cmd = new SqlCommand(query, DatabaseConnection.Connection);
+                DatabaseConnection.Connection.Open();
                 SqlDataReader dr = cmd.ExecuteReader();
                 DataTable dt = new DataTable();
                 dt.Load(dr);
@@ -398,7 +397,7 @@ Nếu khách hàng đã tồn tại hãy kiểm tra Email và SĐT";
             }
             finally
             {
-                _conn.Close();
+                DatabaseConnection.Connection.Close();
             }
         }
 
@@ -472,12 +471,12 @@ Nếu khách hàng đã tồn tại hãy kiểm tra Email và SĐT";
                 return;
             }
             string query = "INSERT INTO Phong(MaLP, TinhTrang) VALUES(@maLP, @tinhTrang)";
-            SqlCommand cmd = new SqlCommand(query, _conn);
+            SqlCommand cmd = new SqlCommand(query, DatabaseConnection.Connection);
             cmd.Parameters.AddWithValue("@maLP", themPhongLPCB.SelectedIndex + 1);
             cmd.Parameters.AddWithValue("@tinhTrang", "trống");
-            _conn.Open();
+            DatabaseConnection.Connection.Open();
             cmd.ExecuteNonQuery();
-            _conn.Close();
+            DatabaseConnection.Connection.Close();
             MessageBox.Show("Thêm phòng thành công");
             ShowPhong();
         }
@@ -490,25 +489,25 @@ Nếu khách hàng đã tồn tại hãy kiểm tra Email và SĐT";
                 return;
             }
             string query = "SELECT COUNT(*) FROM LoaiPhong WHERE TenLP = @tenLP";
-            SqlCommand cmd = new SqlCommand(query, _conn);
+            SqlCommand cmd = new SqlCommand(query, DatabaseConnection.Connection);
             cmd.Parameters.AddWithValue("@tenLP", themTenLP.Text);
-            _conn.Open();
+            DatabaseConnection.Connection.Open();
             int count = Convert.ToInt32(cmd.ExecuteScalar());
-            _conn.Close();
+            DatabaseConnection.Connection.Close();
             if (count > 0)
             {
                 MessageBox.Show("Loại phòng đã tồn tại");
                 return;
             }
             query = "INSERT INTO LoaiPhong(TenLP, GiaTien, MoTa) VALUES(@tenLP, @giaTien, @moTa)";
-            cmd = new SqlCommand(query, _conn);
+            cmd = new SqlCommand(query, DatabaseConnection.Connection);
             cmd.Parameters.AddWithValue("@tenLP", themTenLP.Text);
             cmd.Parameters.AddWithValue("@giaTien", themGiaTienLP.Text);
             string moTa = themMoTaLP.Text == "" ? "Không có mô tả" : themMoTaLP.Text;
             cmd.Parameters.AddWithValue("@moTa", moTa);
-            _conn.Open();
+            DatabaseConnection.Connection.Open();
             cmd.ExecuteNonQuery();
-            _conn.Close();
+            DatabaseConnection.Connection.Close();
             MessageBox.Show("Thêm loại phòng thành công");
             showLoaiPhong();
             CapNhatLoaiPhong();
@@ -562,11 +561,11 @@ Nếu khách hàng đã tồn tại hãy kiểm tra Email và SĐT";
         private bool CheckPhongExit(string maPhong)
         {
             string query = "SELECT COUNT(*) FROM Phong WHERE MaPhong = @maPhong";
-            SqlCommand cmd = new SqlCommand(query, _conn);
+            SqlCommand cmd = new SqlCommand(query, DatabaseConnection.Connection);
             cmd.Parameters.AddWithValue("@maPhong", maPhong);
-            _conn.Open();
+            DatabaseConnection.Connection.Open();
             int count = Convert.ToInt32(cmd.ExecuteScalar());
-            _conn.Close();
+            DatabaseConnection.Connection.Close();
             if (count == 0)
             {
                 MessageBox.Show("Phòng không tồn tại");
@@ -594,19 +593,19 @@ Nếu khách hàng đã tồn tại hãy kiểm tra Email và SĐT";
                     return;
                 }
                 string query = "UPDATE Phong SET TinhTrang = @tinhTrang WHERE MaPhong = @maPhong";
-                SqlCommand cmd = new SqlCommand(query, _conn);
+                SqlCommand cmd = new SqlCommand(query, DatabaseConnection.Connection);
                 cmd.Parameters.AddWithValue("@tinhTrang", "trống");
                 cmd.Parameters.AddWithValue("@maPhong", capNhatMaPhongTB.Text);
-                _conn.Open();
+                DatabaseConnection.Connection.Open();
                 cmd.ExecuteNonQuery();
-                _conn.Close();
+                DatabaseConnection.Connection.Close();
                 query = "UPDATE DatPhong SET TinhTrang = @tinhTrang WHERE MaPhong = @maPhong";
-                cmd = new SqlCommand(query, _conn);
+                cmd = new SqlCommand(query, DatabaseConnection.Connection);
                 cmd.Parameters.AddWithValue("@tinhTrang", "đã trả");
                 cmd.Parameters.AddWithValue("@maPhong", capNhatMaPhongTB.Text);
-                _conn.Open();
+                DatabaseConnection.Connection.Open();
                 cmd.ExecuteNonQuery();
-                _conn.Close();
+                DatabaseConnection.Connection.Close();
                 MessageBox.Show("Check out thành công");
                 ShowPhong();
             }
@@ -618,11 +617,11 @@ Nếu khách hàng đã tồn tại hãy kiểm tra Email và SĐT";
                 }
 
                 string query = "DELETE FROM Phong WHERE MaPhong = @maPhong";
-                SqlCommand cmd = new SqlCommand(query, _conn);
+                SqlCommand cmd = new SqlCommand(query, DatabaseConnection.Connection);
                 cmd.Parameters.AddWithValue("@maPhong", capNhatMaPhongTB.Text);
-                _conn.Open();
+                DatabaseConnection.Connection.Open();
                 cmd.ExecuteNonQuery();
-                _conn.Close();
+                DatabaseConnection.Connection.Close();
                 MessageBox.Show("Xóa thành công");
                 ShowPhong();
             }
@@ -631,12 +630,12 @@ Nếu khách hàng đã tồn tại hãy kiểm tra Email và SĐT";
         private bool checkIfPhongIsInUse(string maPhong)
         {
             string query = "SELECT COUNT(*) FROM Phong WHERE MaPhong = @maPhong AND TinhTrang = @tinhTrang";
-            SqlCommand cmd = new SqlCommand(query, _conn);
+            SqlCommand cmd = new SqlCommand(query, DatabaseConnection.Connection);
             cmd.Parameters.AddWithValue("@maPhong", maPhong);
             cmd.Parameters.AddWithValue("@tinhTrang", "không trống");
-            _conn.Open();
+            DatabaseConnection.Connection.Open();
             int count = Convert.ToInt32(cmd.ExecuteScalar());
-            _conn.Close();
+            DatabaseConnection.Connection.Close();
             if (count > 0)
             {
                 MessageBox.Show("Phòng đang được sử dụng");
@@ -648,12 +647,12 @@ Nếu khách hàng đã tồn tại hãy kiểm tra Email và SĐT";
         private bool checkIfLoaiPhongIsInUse(string tenLP)
         {
             string query = "SELECT COUNT(*) FROM Phong p JOIN LoaiPhong lp ON p.MaLP = lp.MaLP WHERE lp.TenLP = @tenLP AND p.TinhTrang = @tinhTrang";
-            SqlCommand cmd = new SqlCommand(query, _conn);
+            SqlCommand cmd = new SqlCommand(query, DatabaseConnection.Connection);
             cmd.Parameters.AddWithValue("@tenLP", tenLP);
             cmd.Parameters.AddWithValue("@tinhTrang", "không trống");
-            _conn.Open();
+            DatabaseConnection.Connection.Open();
             int count = Convert.ToInt32(cmd.ExecuteScalar());
-            _conn.Close();
+            DatabaseConnection.Connection.Close();
             if (count > 0)
             {
                 MessageBox.Show("Loại phòng đang được sử dụng");
@@ -677,14 +676,14 @@ Nếu khách hàng đã tồn tại hãy kiểm tra Email và SĐT";
                     return;
                 }
                 string query = "SELECT * FROM LoaiPhong WHERE TenLP = @tenLP";
-                SqlCommand cmd = new SqlCommand(query, _conn);
+                SqlCommand cmd = new SqlCommand(query, DatabaseConnection.Connection);
                 cmd.Parameters.AddWithValue("@tenLP", capNhatTenLPTB.Text);
-                _conn.Open();
+                DatabaseConnection.Connection.Open();
                 SqlDataReader dr = cmd.ExecuteReader();
                 if (!dr.Read())
                 {
                     MessageBox.Show("Loại phòng không tồn tại");
-                    _conn.Close();
+                    DatabaseConnection.Connection.Close();
                     return;
                 }
                 else
@@ -696,17 +695,17 @@ Nếu khách hàng đã tồn tại hãy kiểm tra Email và SĐT";
                         MoTa = dr["MoTa"].ToString(),
                         GiaTien = Convert.ToInt32(dr["GiaTien"])
                     };
-                    _conn.Close();
+                    DatabaseConnection.Connection.Close();
                     query = "UPDATE LoaiPhong SET GiaTien = @giaTien, MoTa = @moTa WHERE TenLP = @tenLP";
-                    cmd = new SqlCommand(query, _conn);
-                    _conn.Open();
+                    cmd = new SqlCommand(query, DatabaseConnection.Connection);
+                    DatabaseConnection.Connection.Open();
                     string newGiaTien = capNhatGiaTienLPTB.Text == "" ? lp.GiaTien.ToString() : capNhatGiaTienLPTB.Text;
                     string newMoTa = capNhatMoTaLPTB.Text == "" ? lp.MoTa : capNhatMoTaLPTB.Text;
                     cmd.Parameters.AddWithValue("@giaTien", newGiaTien);
                     cmd.Parameters.AddWithValue("@moTa", newMoTa);
                     cmd.Parameters.AddWithValue("@tenLP", capNhatTenLPTB.Text);
                     cmd.ExecuteNonQuery();
-                    _conn.Close();
+                    DatabaseConnection.Connection.Close();
                     MessageBox.Show("Cập nhật thành công");
                     showLoaiPhong();
                     CapNhatLoaiPhong();
@@ -719,11 +718,11 @@ Nếu khách hàng đã tồn tại hãy kiểm tra Email và SĐT";
                     return;
                 }
                 string query = "DELETE FROM LoaiPhong WHERE TenLP = @tenLP";
-                SqlCommand cmd = new SqlCommand(query, _conn);
+                SqlCommand cmd = new SqlCommand(query, DatabaseConnection.Connection);
                 cmd.Parameters.AddWithValue("@tenLP", capNhatTenLPTB.Text);
-                _conn.Open();
+                DatabaseConnection.Connection.Open();
                 cmd.ExecuteNonQuery();
-                _conn.Close();
+                DatabaseConnection.Connection.Close();
                 MessageBox.Show("Xóa thành công");
                 showLoaiPhong();
                 CapNhatLoaiPhong();

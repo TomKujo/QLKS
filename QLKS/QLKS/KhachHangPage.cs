@@ -11,20 +11,16 @@ using System.Data.SqlClient;
 using System.Drawing.Text;
 using System.ComponentModel.DataAnnotations;
 using QLKS.Model;
+using QLKS.Database;
 
 namespace QLKS
 {
     public partial class KhachHangPage : UserControl
     {
-        #region Properties
-        private SqlConnection _conn;
-        #endregion
-
         #region Constructors
         public KhachHangPage()
         {
             InitializeComponent();
-            _conn = new SqlConnection("Data Source=DESKTOP-HDPCSE2\\SQLEXPRESS;Initial Catalog=QLKS;Integrated Security=True;TrustServerCertificate=True");
             ConnectKhachHangDB();
         }
         #endregion
@@ -51,10 +47,10 @@ namespace QLKS
             {
                 try
                 {
-                    _conn.Open();
+                    DatabaseConnection.Connection.Open();
 
                     string checkQuery = "SELECT COUNT(*) FROM KhachHang WHERE SDT = @SDT AND Email = @Email";
-                    SqlCommand checkCmd = new SqlCommand(checkQuery, _conn);
+                    SqlCommand checkCmd = new SqlCommand(checkQuery, DatabaseConnection.Connection);
                     checkCmd.Parameters.AddWithValue("@SDT", SDT.Text);
                     checkCmd.Parameters.AddWithValue("@Email", Email.Text);
 
@@ -62,12 +58,12 @@ namespace QLKS
                     if (exists > 0)
                     {
                         MessageBox.Show("Khách hàng đã tồn tại");
-                        _conn.Close();
+                        DatabaseConnection.Connection.Close();
                         return;
                     }
 
                     string insertQuery = "INSERT INTO KhachHang(TenKH, NgaySinh, DiaChi, SDT, Email) VALUES(@tenKH, @NgaySinh, @DiaChi, @SDT, @Email)";
-                    SqlCommand insertCmd = new SqlCommand(insertQuery, _conn);
+                    SqlCommand insertCmd = new SqlCommand(insertQuery, DatabaseConnection.Connection);
                     insertCmd.Parameters.AddWithValue("@tenKH", tenKH.Text);
                     insertCmd.Parameters.AddWithValue("@SDT", SDT.Text);
                     insertCmd.Parameters.AddWithValue("@Email", Email.Text);
@@ -98,7 +94,7 @@ namespace QLKS
                     DOB.Value = DateTime.Now;
                     diaChi.Text = string.Empty;
 
-                    _conn.Close();
+                    DatabaseConnection.Connection.Close();
                 }
                 catch (Exception ex)
                 {
@@ -111,13 +107,13 @@ namespace QLKS
         {
             try
             {
-                _conn.Open();
+                DatabaseConnection.Connection.Open();
                 string query = "SELECT * FROM KhachHang";
-                SqlDataAdapter adapter = new SqlDataAdapter(query, _conn);
+                SqlDataAdapter adapter = new SqlDataAdapter(query, DatabaseConnection.Connection);
                 DataTable dt = new DataTable();
                 adapter.Fill(dt);
                 khachHangView.DataSource = dt;
-                _conn.Close();
+                DatabaseConnection.Connection.Close();
             }
             catch (Exception ex)
             {
@@ -137,7 +133,7 @@ namespace QLKS
 
             try
             {
-                _conn.Open();
+                DatabaseConnection.Connection.Open();
                 string query = "SELECT * FROM KhachHang WHERE";
                 if (timTheoTenKH.Text != string.Empty)
                 {
@@ -165,7 +161,7 @@ namespace QLKS
                         query += " Email LIKE @Email";
                     }
                 }
-                SqlDataAdapter adapter = new SqlDataAdapter(query, _conn);
+                SqlDataAdapter adapter = new SqlDataAdapter(query, DatabaseConnection.Connection);
                 if (timTheoTenKH.Text != string.Empty)
                 {
                     adapter.SelectCommand.Parameters.AddWithValue("@tenKH", "%" + timTheoTenKH.Text + "%");
@@ -188,7 +184,7 @@ namespace QLKS
             }
             finally
             {
-                _conn.Close();
+                DatabaseConnection.Connection.Close();
             }
         }
 
@@ -245,16 +241,16 @@ namespace QLKS
                         return;
                     }
                 }
-                _conn.Open();
+                DatabaseConnection.Connection.Open();
                 string searchQuery = "SELECT * FROM KhachHang WHERE MaKH = @MaKH";
-                SqlDataAdapter adapter = new SqlDataAdapter(searchQuery, _conn);
+                SqlDataAdapter adapter = new SqlDataAdapter(searchQuery, DatabaseConnection.Connection);
                 adapter.SelectCommand.Parameters.AddWithValue("@MaKH", maKH.Text);
                 DataTable dt = new DataTable();
                 adapter.Fill(dt);
                 if (dt.Rows.Count == 0)
                 {
                     MessageBox.Show("Không tìm thấy khách hàng");
-                    _conn.Close();
+                    DatabaseConnection.Connection.Close();
                     return;
                 }
                 else
@@ -270,7 +266,7 @@ namespace QLKS
                     };
 
                     string updateQuery = "UPDATE KhachHang SET TenKH = @tenKH, NgaySinh = @NgaySinh, DiaChi = @DiaChi, SDT = @SDT, Email = @Email WHERE MaKH = @MaKH";
-                    SqlDataAdapter updateDataAdapter = new SqlDataAdapter(updateQuery, _conn);
+                    SqlDataAdapter updateDataAdapter = new SqlDataAdapter(updateQuery, DatabaseConnection.Connection);
                     if (capNhatTenKH.Text != string.Empty)
                     {
                         updateDataAdapter.SelectCommand.Parameters.AddWithValue("@tenKH", capNhatTenKH.Text);
@@ -313,7 +309,7 @@ namespace QLKS
                     }
                     updateDataAdapter.SelectCommand.Parameters.AddWithValue("@MaKH", maKH.Text);
                     updateDataAdapter.SelectCommand.ExecuteNonQuery();
-                    _conn.Close();
+                    DatabaseConnection.Connection.Close();
                     MessageBox.Show("Cập nhật thông tin khách hàng thành công");
                 }
             }
@@ -332,25 +328,25 @@ namespace QLKS
             }
             try
             {
-                _conn.Open();
+                DatabaseConnection.Connection.Open();
                 string searchQuery = "SELECT * FROM KhachHang WHERE MaKH = @MaKH";
-                SqlDataAdapter adapter = new SqlDataAdapter(searchQuery, _conn);
+                SqlDataAdapter adapter = new SqlDataAdapter(searchQuery, DatabaseConnection.Connection);
                 adapter.SelectCommand.Parameters.AddWithValue("@MaKH", maKH.Text);
                 DataTable dt = new DataTable();
                 adapter.Fill(dt);
                 if (dt.Rows.Count == 0)
                 {
                     MessageBox.Show("Không tìm thấy khách hàng");
-                    _conn.Close();
+                    DatabaseConnection.Connection.Close();
                     return;
                 }
                 else
                 {
                     string deleteQuery = "DELETE FROM KhachHang WHERE MaKH = @MaKH";
-                    SqlDataAdapter deleteDataAdapter = new SqlDataAdapter(deleteQuery, _conn);
+                    SqlDataAdapter deleteDataAdapter = new SqlDataAdapter(deleteQuery, DatabaseConnection.Connection);
                     deleteDataAdapter.SelectCommand.Parameters.AddWithValue("@MaKH", maKH.Text);
                     deleteDataAdapter.SelectCommand.ExecuteNonQuery();
-                    _conn.Close();
+                    DatabaseConnection.Connection.Close();
                     MessageBox.Show("Xóa khách hàng thành công");
                 }
             }

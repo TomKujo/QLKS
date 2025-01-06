@@ -8,55 +8,54 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Data.SqlClient;
+using QLKS.Database;
 
 namespace QLKS
 {
     public partial class DashboardPage : UserControl
     {
-        private SqlConnection _conn;
         public DashboardPage()
         {
             InitializeComponent();
-            _conn = new SqlConnection("Data Source=DESKTOP-HDPCSE2\\SQLEXPRESS;Initial Catalog=QLKS;Integrated Security=True;TrustServerCertificate=True");
         }
 
         private void getSoluongPhong()
         {
-            _conn.Open();
+            DatabaseConnection.Connection.Open();
             string query = "SELECT COUNT(*) FROM PHONG";
-            SqlCommand cmd = new SqlCommand(query, _conn);
+            SqlCommand cmd = new SqlCommand(query, DatabaseConnection.Connection);
             int soluongPhong = (int)cmd.ExecuteScalar();
-            _conn.Close();
+            DatabaseConnection.Connection.Close();
             soPhong.Text = soluongPhong.ToString();
         }
 
         private void getSoluongKhachHang()
         {
-            _conn.Open();
+            DatabaseConnection.Connection.Open();
             string query = "SELECT COUNT(*) FROM KHACHHANG";
-            SqlCommand cmd = new SqlCommand(query, _conn);
+            SqlCommand cmd = new SqlCommand(query, DatabaseConnection.Connection);
             int soluongKhachHang = (int)cmd.ExecuteScalar();
-            _conn.Close();
+            DatabaseConnection.Connection.Close();
             soKH.Text = soluongKhachHang.ToString();
         }
 
         private void getSoluongNhanVien()
         {
-            _conn.Open();
+            DatabaseConnection.Connection.Open();
             string query = "SELECT COUNT(*) FROM NHANVIEN";
-            SqlCommand cmd = new SqlCommand(query, _conn);
+            SqlCommand cmd = new SqlCommand(query, DatabaseConnection.Connection);
             int soluongNhanVien = (int)cmd.ExecuteScalar();
-            _conn.Close();
+            DatabaseConnection.Connection.Close();
             soNV.Text = soluongNhanVien.ToString();
         }
 
         private void getDoanhThu()
         {
-            _conn.Open();
+            DatabaseConnection.Connection.Open();
             string query = "SELECT SUM(TongTien) FROM DatPhong";
-            SqlCommand cmd = new SqlCommand(query, _conn);
+            SqlCommand cmd = new SqlCommand(query, DatabaseConnection.Connection);
             int doanhThu = Convert.ToInt32(cmd.ExecuteScalar());
-            _conn.Close();
+            DatabaseConnection.Connection.Close();
             soDoanhThu.Text = doanhThu.ToString();
         }
 
